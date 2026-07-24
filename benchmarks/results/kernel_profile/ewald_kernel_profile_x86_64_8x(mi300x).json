@@ -1,0 +1,62 @@
+{
+  "HIP": {
+    "kernels": [
+      {
+        "name": "P2P",
+        "total_time": 0.012734
+      },
+      {
+        "name": "P2G",
+        "total_time": 0.005366
+      },
+      {
+        "name": "FFT",
+        "total_time": 0.000423
+      },
+      {
+        "name": "CNV",
+        "total_time": 0.010825
+      },
+      {
+        "name": "IFFT",
+        "total_time": 0.000453
+      },
+      {
+        "name": "G2P",
+        "total_time": 0.007837
+      }
+    ],
+    "profile_runs": 1,
+    "profile_run_failures": 0
+  },
+  "DebugHIP": {
+    "kernels": [
+      {
+        "name": "P2P",
+        "total_time": 0.296701
+      },
+      {
+        "name": "P2G",
+        "total_time": 0.036436
+      },
+      {
+        "name": "FFT",
+        "total_time": 0.000562
+      },
+      {
+        "name": "CNV",
+        "total_time": 0.036696
+      },
+      {
+        "name": "IFFT",
+        "total_time": 0.00051
+      },
+      {
+        "name": "G2P",
+        "total_time": 0.013372
+      }
+    ],
+    "profile_runs": 1,
+    "profile_run_failures": 0
+  }
+}

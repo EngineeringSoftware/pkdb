@@ -1,0 +1,172 @@
+{
+  "test": "boltzmann",
+  "output_file": "/home1/sifi/pkdb/eval/benchmarks/results/boltzmann_results_x86_64_8x(mi300x).json",
+  "kernels_output_file": "/home1/sifi/pkdb/eval/benchmarks/results/boltzmann_kernels_x86_64_8x(mi300x).json",
+  "log_file": "/home1/sifi/pkdb/eval/benchmarks/results/boltzmann_out_boltzmann.log",
+  "config": {
+    "main_py": "/home1/sifi/pkdb/eval/benchmarks/boltzmann/main.py",
+    "script_args": [],
+    "step_counts": [
+      10,
+      100,
+      400,
+      1000,
+      5000,
+      10000
+    ],
+    "n_runs": 10,
+    "timeout_s": 3600
+  },
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Rocky Linux 9.1 (Blue Onyx)",
+      "kernel": "5.14.0-503.38.1.el9_5.x86_64"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 384
+    },
+    "ram": {
+      "bytes": 2434083647488
+    },
+    "gpus": [
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "steps": 10,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 0.0249,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 0.0544,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "steps": 100,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 0.2488,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 0.5431,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "steps": 400,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 0.9902,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 2.1742,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "steps": 1000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 2.476,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 5.4279,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "steps": 5000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 12.4077,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 27.117,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "steps": 10000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 24.8774,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 54.578,
+          "pkdb_debug_avg": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+% --- Minimal DefMacro/UseMacro infra (verbatim from paper/sc26/macros.tex) ---
+\newcommand{\DefMacro}[2]{\expandafter\newcommand\csname rmk-#1\endcsname{#2}}
+\newcommand{\UseMacro}[1]{\csname rmk-#1\endcsname}
+\newcommand{\UseMacroRound}[2]{%
+  \begingroup
+  \edef\rmk@val{\UseMacro{#1}}%
+  \pgfmathprintnumber[fixed, precision=#2]{\rmk@val}%
+  \endgroup
+}
+
+% --- Name macros used by the generated tables (subset of paper/sc26/macros.tex) ---
+\newcommand{\ourTool}{\textsc{pkdb}\xspace}
+\newcommand{\Cuda}{CUDA\xspace}
+\newcommand{\Openmp}{OpenMP\xspace}
+\newcommand{\Hip}{HIP\xspace}
+\newcommand{\Exa}{ExaMiniMD\xspace}
+\newcommand{\Boltz}{Boltzmann\xspace}
+\newcommand{\Ewald}{Ewald\xspace}
+\newcommand{\Parki}{Parki\xspace}
+
+% --- pgfplots line styles for speed charts (subset of paper/sc26/macros.tex) ---
+\pgfplotsset{
+  EvalPlotStyleOpenMP/.style={orange!90!black, thick, dashed, mark=x, mark options={scale=0.78}},
+  EvalPlotStylePkdbOpenMP/.style={green!60!black, thick, densely dotted, mark=*, mark options={scale=0.72}},
+  EvalPlotStyleCuda/.style={purple!80!black, very thick, solid, mark=o, mark options={scale=0.72}},
+  EvalPlotStylePkdbCuda/.style={blue!80!black, thick, dotted, mark=square*, mark options={scale=0.65}},
+  EvalPlotStyleHIP/.style={red!75!black, thick, dashed, mark=diamond*, mark options={scale=0.86}},
+  EvalPlotStylePkdbHIP/.style={teal!70!black, thick, dashdotted, mark=triangle*, mark options={scale=0.86}},
+  EvalPlotStyleBaseline/.style={black, thick, densely dashed, mark=triangle*, mark options={scale=0.72}},
+}

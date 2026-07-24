@@ -1,0 +1,170 @@
+{
+  "OpenMP": {
+    "kernels": [
+      {
+        "name": "CommSerial::exchange_self",
+        "time": 0.01531
+      },
+      {
+        "name": "CommSerial::halo_exchange_self",
+        "time": 0.058944
+      },
+      {
+        "name": "CommSerial::halo_update_self",
+        "time": 0.04468
+      },
+      {
+        "name": "ForceLJNeigh::compute",
+        "time": 0.149753
+      },
+      {
+        "name": "ForceLJNeigh::compute_energy",
+        "time": 0.163987
+      },
+      {
+        "name": "IntegratorNVE::final_integrate",
+        "time": 0.033356
+      },
+      {
+        "name": "IntegratorNVE::initial_integrate",
+        "time": 0.048833
+      },
+      {
+        "name": "KinE",
+        "time": 0.022891
+      },
+      {
+        "name": "Neighbor2D::fill_neigh_list_full",
+        "time": 0.289107
+      }
+    ],
+    "profile_runs": 3,
+    "profile_run_failures": 0
+  },
+  "DebugOpenMP": {
+    "kernels": [
+      {
+        "name": "CommSerial::exchange_self",
+        "time": 0.017194
+      },
+      {
+        "name": "CommSerial::halo_exchange_self",
+        "time": 0.063469
+      },
+      {
+        "name": "CommSerial::halo_update_self",
+        "time": 0.039318
+      },
+      {
+        "name": "ForceLJNeigh::compute",
+        "time": 0.489839
+      },
+      {
+        "name": "ForceLJNeigh::compute_energy",
+        "time": 0.62018
+      },
+      {
+        "name": "IntegratorNVE::final_integrate",
+        "time": 0.034532
+      },
+      {
+        "name": "IntegratorNVE::initial_integrate",
+        "time": 0.0475
+      },
+      {
+        "name": "KinE",
+        "time": 0.024603
+      },
+      {
+        "name": "Neighbor2D::fill_neigh_list_full",
+        "time": 18.266392
+      }
+    ],
+    "profile_runs": 3,
+    "profile_run_failures": 0
+  },
+  "Cuda": {
+    "kernels": [
+      {
+        "name": "CommSerial::exchange_self",
+        "time": 0.044048
+      },
+      {
+        "name": "CommSerial::halo_exchange_self",
+        "time": 0.114457
+      },
+      {
+        "name": "CommSerial::halo_update_self",
+        "time": 0.114372
+      },
+      {
+        "name": "ForceLJNeigh::compute",
+        "time": 0.548777
+      },
+      {
+        "name": "ForceLJNeigh::compute_energy",
+        "time": 0.428912
+      },
+      {
+        "name": "IntegratorNVE::final_integrate",
+        "time": 0.094736
+      },
+      {
+        "name": "IntegratorNVE::initial_integrate",
+        "time": 0.13621
+      },
+      {
+        "name": "KinE",
+        "time": 0.052142
+      },
+      {
+        "name": "Neighbor2D::fill_neigh_list_full",
+        "time": 0.429452
+      }
+    ],
+    "profile_runs": 3,
+    "profile_run_failures": 0
+  },
+  "DebugCuda": {
+    "kernels": [
+      {
+        "name": "CommSerial::exchange_self",
+        "time": 0.041827
+      },
+      {
+        "name": "CommSerial::halo_exchange_self",
+        "time": 0.106445
+      },
+      {
+        "name": "CommSerial::halo_update_self",
+        "time": 0.101583
+      },
+      {
+        "name": "ForceLJNeigh::compute",
+        "time": 0.726411
+      },
+      {
+        "name": "ForceLJNeigh::compute_energy",
+        "time": 0.750172
+      },
+      {
+        "name": "IntegratorNVE::final_integrate",
+        "time": 0.08945
+      },
+      {
+        "name": "IntegratorNVE::initial_integrate",
+        "time": 0.129049
+      },
+      {
+        "name": "KinE",
+        "time": 0.053498
+      },
+      {
+        "name": "Neighbor2D::fill_neigh_list_full",
+        "time": 9.140568
+      }
+    ],
+    "profile_runs": 3,
+    "profile_run_failures": 0
+  }
+}

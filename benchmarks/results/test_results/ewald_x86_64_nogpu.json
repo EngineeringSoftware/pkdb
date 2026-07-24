@@ -1,0 +1,505 @@
+{
+  "test": "ewald",
+  "runs": 1,
+  "output_file": "results/ewald_x86_64_nogpu.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Red Hat Enterprise Linux 8.10 (Ootpa)",
+      "kernel": "4.18.0-553.16.1.el8_10.x86_64"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 192,
+      "hz_by_logical_core": [
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3699995000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700365000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700054000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000,
+        3700000000
+      ]
+    },
+    "ram": {
+      "bytes": 538748968960
+    },
+    "gpus": []
+  },
+  "sizes": [
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.0462,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 0.4185,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.0484,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 0.6923,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.0924,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 1.3582,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.1275,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 4.1264,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.1364,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 5.4683,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.1605,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 5.199,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.1898,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 6.351,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.2042,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 6.888,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.2235,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 7.561,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.2154,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 7.7669,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.1992,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 8.3167,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.2047,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 8.5818,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.5038,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 18.5152,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 0.8403,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 37.4541,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 5000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 7000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 10000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    }
+  ]
+}

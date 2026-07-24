@@ -1,0 +1,360 @@
+{
+  "test": "examinimd",
+  "output_file": "results/examinimd_x86_64_amd_radeon_graphics.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Rocky Linux 9.1 (Blue Onyx)",
+      "kernel": "5.14.0-503.38.1.el9_5.x86_64"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 192
+    },
+    "ram": {
+      "bytes": 2434154885120
+    },
+    "gpus": [
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 1000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 0.8424,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 1.2798,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 0.8399,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 1.2942,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 1.0162,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 1.5437,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 1.5465,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 2.3925,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 2.5678,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 4.5872,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 2.9977,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 4.9445,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 3.1469,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 5.3638,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 4.6206,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 6.8309,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 4.777,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 7.2865,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 4.9251,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 7.565,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 5.3295,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 7.9271,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 5.4867,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 8.432,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 5.7938,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 8.7615,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 11.5239,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 16.8244,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 10,
+          "normal_avg": 22.7349,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 10,
+          "normal_avg": 32.9276,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 5000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 36.5804,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 66.3383,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 7000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 80.9788,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 116.3525,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 10000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": 114.3264,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "DebugHIP",
+          "runs": 1,
+          "normal_avg": 164.4329,
+          "pkdb_debug_avg": null
+        }
+      ]
+    }
+  ]
+}

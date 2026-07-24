@@ -1,0 +1,417 @@
+{
+  "test": "ewald",
+  "output_file": "/home/sifi/UT/RA/Kokkos/pkdb-internal/eval/benchmarks/results/ewald_x86_64_nvidia_geforce_rtx_3050_ti_laptop_gpu.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Pop!_OS 22.04 LTS",
+      "kernel": "6.17.9-76061709-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 12
+    },
+    "ram": {
+      "bytes": 16134279168
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+        "memory_total_bytes": 4294967296
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 5000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 7000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 10000000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "OpenMP",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        },
+        {
+          "backend": "Cuda",
+          "runs": 1,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "OpenMP": {
+    "kernels": [
+      {
+        "name": "P2P",
+        "total_time": 0.006532
+      },
+      {
+        "name": "P2G",
+        "total_time": 0.005419
+      },
+      {
+        "name": "FFT",
+        "total_time": 0.002467
+      },
+      {
+        "name": "CNV",
+        "total_time": 0.010763
+      },
+      {
+        "name": "IFFT",
+        "total_time": 0.000594
+      },
+      {
+        "name": "G2P",
+        "total_time": 0.004517
+      }
+    ],
+    "profile_runs": 1,
+    "profile_run_failures": 0
+  },
+  "DebugOpenMP": {
+    "kernels": [
+      {
+        "name": "P2P",
+        "total_time": 0.022647
+      },
+      {
+        "name": "P2G",
+        "total_time": 0.017247
+      },
+      {
+        "name": "FFT",
+        "total_time": 0.002546
+      },
+      {
+        "name": "CNV",
+        "total_time": 0.015392
+      },
+      {
+        "name": "IFFT",
+        "total_time": 0.000598
+      },
+      {
+        "name": "G2P",
+        "total_time": 0.005631
+      }
+    ],
+    "profile_runs": 1,
+    "profile_run_failures": 0
+  },
+  "Cuda": {
+    "kernels": [
+      {
+        "name": "P2P",
+        "total_time": 0.012788
+      },
+      {
+        "name": "P2G",
+        "total_time": 0.005783
+      },
+      {
+        "name": "FFT",
+        "total_time": 0.000339
+      },
+      {
+        "name": "CNV",
+        "total_time": 0.019945
+      },
+      {
+        "name": "IFFT",
+        "total_time": 0.000211
+      },
+      {
+        "name": "G2P",
+        "total_time": 0.008503
+      }
+    ],
+    "profile_runs": 1,
+    "profile_run_failures": 0
+  },
+  "DebugCuda": {
+    "kernels": [
+      {
+        "name": "P2P",
+        "total_time": 0.257034
+      },
+      {
+        "name": "P2G",
+        "total_time": 0.047143
+      },
+      {
+        "name": "FFT",
+        "total_time": 0.000347
+      },
+      {
+        "name": "CNV",
+        "total_time": 0.031122
+      },
+      {
+        "name": "IFFT",
+        "total_time": 0.000204
+      },
+      {
+        "name": "G2P",
+        "total_time": 0.01526
+      }
+    ],
+    "profile_runs": 1,
+    "profile_run_failures": 0
+  }
+}

@@ -1,0 +1,518 @@
+{
+  "test": "boltzmann_kernels",
+  "output_file": "/home/sifi/pkdb/eval/benchmarks/results/boltzmann_kernels_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "config": {
+    "main_py": "/home/sifi/pkdb/eval/benchmarks/boltzmann/main.py",
+    "script_args": [],
+    "step_counts": [
+      10,
+      100,
+      400,
+      1000,
+      5000,
+      10000
+    ],
+    "n_runs": 10,
+    "timeout_s": 3600
+  },
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "6.17.0-19-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32
+    },
+    "ram": {
+      "bytes": 134001274880
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      },
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "steps": 10,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "normal_space": "OpenMP",
+          "debug_space": "DebugOpenMP",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.701332,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.060785,
+              "calls": 10
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.772494,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.126023,
+              "calls": 10
+            }
+          ]
+        },
+        {
+          "backend": "Cuda",
+          "normal_space": "Cuda",
+          "debug_space": "DebugCuda",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.033842,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.016364,
+              "calls": 10
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.073128,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.02944,
+              "calls": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "steps": 100,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "normal_space": "OpenMP",
+          "debug_space": "DebugOpenMP",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 4.19433,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.638099,
+              "calls": 100
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 5.298088,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 1.317088,
+              "calls": 100
+            }
+          ]
+        },
+        {
+          "backend": "Cuda",
+          "normal_space": "Cuda",
+          "debug_space": "DebugCuda",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.29184,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.162385,
+              "calls": 100
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.661973,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.284508,
+              "calls": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "steps": 400,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "normal_space": "OpenMP",
+          "debug_space": "DebugOpenMP",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 16.294852,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 2.657583,
+              "calls": 400
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 19.696114,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 5.197706,
+              "calls": 400
+            }
+          ]
+        },
+        {
+          "backend": "Cuda",
+          "normal_space": "Cuda",
+          "debug_space": "DebugCuda",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 1.157536,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.653216,
+              "calls": 400
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 2.598746,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 1.128605,
+              "calls": 400
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "steps": 1000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "normal_space": "OpenMP",
+          "debug_space": "DebugOpenMP",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 38.342063,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 6.329092,
+              "calls": 1000
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 45.935555,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 12.795535,
+              "calls": 1000
+            }
+          ]
+        },
+        {
+          "backend": "Cuda",
+          "normal_space": "Cuda",
+          "debug_space": "DebugCuda",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 2.944274,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 1.651376,
+              "calls": 1000
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 6.520694,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 2.841998,
+              "calls": 1000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "steps": 5000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "normal_space": "OpenMP",
+          "debug_space": "DebugOpenMP",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 202.123564,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 32.968597,
+              "calls": 5000
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 241.124897,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 65.765315,
+              "calls": 5000
+            }
+          ]
+        },
+        {
+          "backend": "Cuda",
+          "normal_space": "Cuda",
+          "debug_space": "DebugCuda",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 14.618962,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 8.218495,
+              "calls": 5000
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 32.692391,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 14.303115,
+              "calls": 5000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "steps": 10000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "normal_space": "OpenMP",
+          "debug_space": "DebugOpenMP",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 399.064259,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 65.44196,
+              "calls": 10000
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 463.259344,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 132.688985,
+              "calls": 10000
+            }
+          ]
+        },
+        {
+          "backend": "Cuda",
+          "normal_space": "Cuda",
+          "debug_space": "DebugCuda",
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 29.064219,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 16.395137,
+              "calls": 10000
+            }
+          ],
+          "kernels_debug": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 64.809764,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 28.295417,
+              "calls": 10000
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "test": "examinimd",
+  "runs": 1,
+  "output_file": "results/examinimd_debug_comparison.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Rocky Linux 9.7 (Blue Onyx)",
+      "kernel": "5.14.0-611.16.1.el9_7.aarch64+64k"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 72,
+      "hz_by_logical_core": null
+    },
+    "ram": {
+      "bytes": 228434706432
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA GH200 120GB",
+        "memory_total_bytes": 102625181696
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 100,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 1,
+          "normal_avg": 0.4979,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "normal_avg": 1.2313,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 1,
+          "normal_avg": 10.9157,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 200,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 1,
+          "normal_avg": 0.6054,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "normal_avg": 1.0291,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 1,
+          "normal_avg": 22.8404,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 500,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 1,
+          "normal_avg": 0.7862,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "normal_avg": 1.1849,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 1,
+          "normal_avg": 47.473,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 1000,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 1,
+          "normal_avg": 0.9973,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "normal_avg": 1.07,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 1,
+          "normal_avg": 73.3723,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 5000,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 1,
+          "normal_avg": 3.6712,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "normal_avg": 1.0845,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 1,
+          "normal_avg": 423.1648,
+          "debug_avg": null
+        }
+      ]
+    }
+  ]
+}

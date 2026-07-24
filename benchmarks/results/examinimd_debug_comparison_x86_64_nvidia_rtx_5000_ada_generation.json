@@ -1,0 +1,142 @@
+{
+  "test": "examinimd",
+  "runs": 100,
+  "output_file": "results/examinimd_debug_comparison_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "6.17.0-19-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32
+    },
+    "ram": {
+      "bytes": 134001274880
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 100,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 100,
+          "normal_avg": 1.2272,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 100,
+          "normal_avg": 1.3261,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 100,
+          "normal_avg": 11.5704,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 200,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 100,
+          "normal_avg": 0.7004,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 100,
+          "normal_avg": 1.2088,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 100,
+          "normal_avg": 23.966,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 500,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 100,
+          "normal_avg": 0.6046,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 100,
+          "normal_avg": 1.3051,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 100,
+          "normal_avg": 49.3959,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 1000,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 100,
+          "normal_avg": 0.6168,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 100,
+          "normal_avg": 1.3023,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 100,
+          "normal_avg": 77.0959,
+          "debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 5000,
+      "backends": [
+        {
+          "backend": "DebugOpenMP",
+          "runs": 100,
+          "normal_avg": 0.8714,
+          "debug_avg": null
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 100,
+          "normal_avg": 1.3582,
+          "debug_avg": null
+        },
+        {
+          "backend": "Debug",
+          "runs": 100,
+          "normal_avg": 460.8648,
+          "debug_avg": null
+        }
+      ]
+    }
+  ]
+}

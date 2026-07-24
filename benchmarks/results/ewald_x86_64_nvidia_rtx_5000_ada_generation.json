@@ -1,0 +1,354 @@
+{
+  "test": "ewald",
+  "runs": 3,
+  "output_file": "results/ewald_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "6.17.0-19-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32,
+      "hz_by_logical_core": [
+        1181576000,
+        2899970000,
+        2891535000,
+        2708766000,
+        2582857000,
+        2444941000,
+        800000000,
+        2907816000,
+        2148341000,
+        1772068000,
+        1653873000,
+        800000000,
+        1589309000,
+        2401975000,
+        800000000,
+        800000000,
+        800000000,
+        800000000,
+        2883570000,
+        2900029000,
+        800000000,
+        2828609000,
+        1430954000,
+        2900000000,
+        800000000,
+        800000000,
+        1269352000,
+        2833368000,
+        1397706000,
+        2347170000,
+        2684988000,
+        2900756000
+      ]
+    },
+    "ram": {
+      "bytes": 134001274880
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      },
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 0.2213,
+          "pkdb_debug_avg": 0.3528
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.2429,
+          "pkdb_debug_avg": 0.5203
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 0.4428,
+          "pkdb_debug_avg": 1.3585
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.3314,
+          "pkdb_debug_avg": 0.6693
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 1.0741,
+          "pkdb_debug_avg": 5.4693
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.4761,
+          "pkdb_debug_avg": 1.5047
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 2.5369,
+          "pkdb_debug_avg": 12.7973
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.6608,
+          "pkdb_debug_avg": 2.9944
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 2.6691,
+          "pkdb_debug_avg": 13.962
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.6736,
+          "pkdb_debug_avg": 3.309
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 2.9582,
+          "pkdb_debug_avg": 15.4489
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.7741,
+          "pkdb_debug_avg": 3.5118
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 3.4417,
+          "pkdb_debug_avg": 17.7711
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.8183,
+          "pkdb_debug_avg": 4.1278
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 3.5075,
+          "pkdb_debug_avg": 19.1823
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.869,
+          "pkdb_debug_avg": 4.408
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 3.6215,
+          "pkdb_debug_avg": 19.8697
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.8597,
+          "pkdb_debug_avg": 4.6678
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 3.7866,
+          "pkdb_debug_avg": 21.1739
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.9072,
+          "pkdb_debug_avg": 4.9285
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 3.8849,
+          "pkdb_debug_avg": 22.3733
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.9406,
+          "pkdb_debug_avg": 5.0829
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 4.2227,
+          "pkdb_debug_avg": 23.7416
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 0.9845,
+          "pkdb_debug_avg": 5.2188
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 8.1773,
+          "pkdb_debug_avg": 47.0396
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 1.7832,
+          "pkdb_debug_avg": 10.4725
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 15.8126,
+          "pkdb_debug_avg": 96.1686
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": 3.2284,
+          "pkdb_debug_avg": 20.8233
+        }
+      ]
+    },
+    {
+      "atoms": 5000000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 54.0509,
+          "pkdb_debug_avg": 250.6087
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 7000000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 93.6834,
+          "pkdb_debug_avg": 373.1394
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    },
+    {
+      "atoms": 10000000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 3,
+          "normal_avg": 147.0004,
+          "pkdb_debug_avg": 550.4082
+        },
+        {
+          "backend": "Cuda",
+          "runs": 3,
+          "normal_avg": null,
+          "pkdb_debug_avg": null
+        }
+      ]
+    }
+  ]
+}

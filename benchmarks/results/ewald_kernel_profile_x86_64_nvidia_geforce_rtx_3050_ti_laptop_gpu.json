@@ -1,0 +1,18 @@
+{
+  "OpenMP": {
+    "kernels": [],
+    "profile_runs": 0
+  },
+  "DebugOpenMP": {
+    "kernels": [],
+    "profile_runs": 0
+  },
+  "Cuda": {
+    "kernels": [],
+    "profile_runs": 0
+  },
+  "DebugCuda": {
+    "kernels": [],
+    "profile_runs": 0
+  }
+}

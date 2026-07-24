@@ -1,0 +1,148 @@
+{
+  "test": "boltzmann",
+  "output_file": "/home/sifi/pkdb/eval/benchmarks/results/boltzmann_results_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "kernels_output_file": "/home/sifi/pkdb/eval/benchmarks/results/boltzmann_kernels_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "log_file": "/home/sifi/pkdb/eval/benchmarks/results/boltzmann_out_boltzmann.log",
+  "config": {
+    "main_py": "/home/sifi/pkdb/eval/benchmarks/boltzmann/main.py",
+    "script_args": [],
+    "step_counts": [
+      10,
+      100,
+      400,
+      1000,
+      5000,
+      10000
+    ],
+    "n_runs": 10,
+    "timeout_s": 3600
+  },
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "6.17.0-19-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32
+    },
+    "ram": {
+      "bytes": 134001274880
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      },
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "steps": 10,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 10,
+          "normal_avg": 0.3149,
+          "pkdb_debug_avg": 0.4432
+        },
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 0.0298,
+          "pkdb_debug_avg": 0.066
+        }
+      ]
+    },
+    {
+      "steps": 100,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 10,
+          "normal_avg": 3.6539,
+          "pkdb_debug_avg": 4.819
+        },
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 0.2946,
+          "pkdb_debug_avg": 0.6481
+        }
+      ]
+    },
+    {
+      "steps": 400,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 10,
+          "normal_avg": 15.8437,
+          "pkdb_debug_avg": 19.5515
+        },
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 1.1604,
+          "pkdb_debug_avg": 2.5993
+        }
+      ]
+    },
+    {
+      "steps": 1000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 10,
+          "normal_avg": 39.7943,
+          "pkdb_debug_avg": 47.2797
+        },
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 2.9127,
+          "pkdb_debug_avg": 6.4789
+        }
+      ]
+    },
+    {
+      "steps": 5000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 10,
+          "normal_avg": 193.1234,
+          "pkdb_debug_avg": 234.1316
+        },
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 14.5498,
+          "pkdb_debug_avg": 32.4571
+        }
+      ]
+    },
+    {
+      "steps": 10000,
+      "backends": [
+        {
+          "backend": "OpenMP",
+          "runs": 10,
+          "normal_avg": 391.9512,
+          "pkdb_debug_avg": 469.2949
+        },
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 28.9409,
+          "pkdb_debug_avg": 64.8843
+        }
+      ]
+    }
+  ]
+}

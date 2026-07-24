@@ -1,0 +1,362 @@
+{
+  "test": "boltzmann_kernels",
+  "output_file": "/home1/sifi/pkdb/eval/benchmarks/results/boltzmann_kernels_x86_64_8x(mi300x).json",
+  "config": {
+    "main_py": "/home1/sifi/pkdb/eval/benchmarks/boltzmann/main.py",
+    "script_args": [],
+    "step_counts": [
+      10,
+      100,
+      400,
+      1000,
+      5000,
+      10000
+    ],
+    "n_runs": 10,
+    "timeout_s": 3600
+  },
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Rocky Linux 9.1 (Blue Onyx)",
+      "kernel": "5.14.0-503.38.1.el9_5.x86_64"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 384
+    },
+    "ram": {
+      "bytes": 2434083647488
+    },
+    "gpus": [
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Instinct MI300X",
+        "memory_total_bytes": 206141652992
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "steps": 10,
+      "backends": [
+        {
+          "backend": "HIP",
+          "normal_space": "HIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.028223,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.010861,
+              "calls": 10
+            }
+          ],
+          "kernels_debug": null
+        },
+        {
+          "backend": "DebugHIP",
+          "normal_space": "DebugHIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.060357,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.022652,
+              "calls": 10
+            }
+          ],
+          "kernels_debug": null
+        }
+      ]
+    },
+    {
+      "steps": 100,
+      "backends": [
+        {
+          "backend": "HIP",
+          "normal_space": "HIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.251246,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.112634,
+              "calls": 100
+            }
+          ],
+          "kernels_debug": null
+        },
+        {
+          "backend": "DebugHIP",
+          "normal_space": "DebugHIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 0.552836,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.225663,
+              "calls": 100
+            }
+          ],
+          "kernels_debug": null
+        }
+      ]
+    },
+    {
+      "steps": 400,
+      "backends": [
+        {
+          "backend": "HIP",
+          "normal_space": "HIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 1.000145,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.451632,
+              "calls": 400
+            }
+          ],
+          "kernels_debug": null
+        },
+        {
+          "backend": "DebugHIP",
+          "normal_space": "DebugHIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 2.185926,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 0.919533,
+              "calls": 400
+            }
+          ],
+          "kernels_debug": null
+        }
+      ]
+    },
+    {
+      "steps": 1000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "normal_space": "HIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 2.474148,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 1.119219,
+              "calls": 1000
+            }
+          ],
+          "kernels_debug": null
+        },
+        {
+          "backend": "DebugHIP",
+          "normal_space": "DebugHIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 5.420742,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 2.278131,
+              "calls": 1000
+            }
+          ],
+          "kernels_debug": null
+        }
+      ]
+    },
+    {
+      "steps": 5000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "normal_space": "HIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 12.264504,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 5.521285,
+              "calls": 5000
+            }
+          ],
+          "kernels_debug": null
+        },
+        {
+          "backend": "DebugHIP",
+          "normal_space": "DebugHIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 27.308891,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 11.47849,
+              "calls": 5000
+            }
+          ],
+          "kernels_debug": null
+        }
+      ]
+    },
+    {
+      "steps": 10000,
+      "backends": [
+        {
+          "backend": "HIP",
+          "normal_space": "HIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 25.406712,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 11.277874,
+              "calls": 10000
+            }
+          ],
+          "kernels_debug": null
+        },
+        {
+          "backend": "DebugHIP",
+          "normal_space": "DebugHIP",
+          "debug_space": null,
+          "kernels_normal": [
+            {
+              "parent": null,
+              "function": "main",
+              "lineno": 43,
+              "time_s": 54.204416,
+              "calls": 1
+            },
+            {
+              "parent": "run",
+              "function": "electron_kernel",
+              "lineno": 594,
+              "time_s": 22.741296,
+              "calls": 10000
+            }
+          ],
+          "kernels_debug": null
+        }
+      ]
+    }
+  ]
+}

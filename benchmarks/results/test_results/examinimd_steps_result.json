@@ -1,0 +1,179 @@
+{
+  "source": "/home/sifi/UT/RA/Kokkos/pkdb/eval/benchmarks/results/out_minimd.txt",
+  "results": [
+    {
+      "atoms": 4000,
+      "spaces": {
+        "openmp": {
+          "steps_per_s": 185.039477,
+          "atomsteps_per_s": 740157.908,
+          "atomsteps_per_proc_s": 740157.908,
+          "n_runs": 100
+        },
+        "debugopenmp": {
+          "steps_per_s": 133.108812,
+          "atomsteps_per_s": 532435.2487,
+          "atomsteps_per_proc_s": 532435.2487,
+          "n_runs": 100
+        },
+        "cuda": {
+          "steps_per_s": 100.123654,
+          "atomsteps_per_s": 400494.621,
+          "atomsteps_per_proc_s": 400494.621,
+          "n_runs": 100
+        },
+        "debugcuda": {
+          "steps_per_s": 73.821367,
+          "atomsteps_per_s": 295285.465,
+          "atomsteps_per_proc_s": 295285.465,
+          "n_runs": 100
+        }
+      }
+    },
+    {
+      "atoms": 32000,
+      "spaces": {
+        "openmp": {
+          "steps_per_s": 59.006926,
+          "atomsteps_per_s": 1888221.638,
+          "atomsteps_per_proc_s": 1888221.638,
+          "n_runs": 100
+        },
+        "debugopenmp": {
+          "steps_per_s": 26.392649,
+          "atomsteps_per_s": 844564.761,
+          "atomsteps_per_proc_s": 844564.761,
+          "n_runs": 100
+        },
+        "cuda": {
+          "steps_per_s": 59.199951,
+          "atomsteps_per_s": 1894398.39,
+          "atomsteps_per_proc_s": 1894398.39,
+          "n_runs": 100
+        },
+        "debugcuda": {
+          "steps_per_s": 47.678518,
+          "atomsteps_per_s": 1525712.59,
+          "atomsteps_per_proc_s": 1525712.59,
+          "n_runs": 100
+        }
+      }
+    },
+    {
+      "atoms": 108000,
+      "spaces": {
+        "openmp": {
+          "steps_per_s": 21.07792,
+          "atomsteps_per_s": 2276415.314,
+          "atomsteps_per_proc_s": 2276415.314,
+          "n_runs": 100
+        },
+        "debugopenmp": {
+          "steps_per_s": 8.429548,
+          "atomsteps_per_s": 910391.225,
+          "atomsteps_per_proc_s": 910391.225,
+          "n_runs": 100
+        },
+        "cuda": {
+          "steps_per_s": 35.871793,
+          "atomsteps_per_s": 3874153.71,
+          "atomsteps_per_proc_s": 3874153.71,
+          "n_runs": 100
+        },
+        "debugcuda": {
+          "steps_per_s": 27.671494,
+          "atomsteps_per_s": 2988521.3,
+          "atomsteps_per_proc_s": 2988521.3,
+          "n_runs": 100
+        }
+      }
+    },
+    {
+      "atoms": 256000,
+      "spaces": {
+        "openmp": {
+          "steps_per_s": 9.903028,
+          "atomsteps_per_s": 2535175.12,
+          "atomsteps_per_proc_s": 2535175.12,
+          "n_runs": 100
+        },
+        "debugopenmp": {
+          "steps_per_s": 5.862195,
+          "atomsteps_per_s": 1500721.92,
+          "atomsteps_per_proc_s": 1500721.92,
+          "n_runs": 100
+        },
+        "cuda": {
+          "steps_per_s": 21.586425,
+          "atomsteps_per_s": 5526124.93,
+          "atomsteps_per_proc_s": 5526124.93,
+          "n_runs": 100
+        },
+        "debugcuda": {
+          "steps_per_s": 15.790814,
+          "atomsteps_per_s": 4042448.43,
+          "atomsteps_per_proc_s": 4042448.43,
+          "n_runs": 100
+        }
+      }
+    },
+    {
+      "atoms": 500000,
+      "spaces": {
+        "openmp": {
+          "steps_per_s": 11.072778,
+          "atomsteps_per_s": 5536388.96,
+          "atomsteps_per_proc_s": 5536388.96,
+          "n_runs": 100
+        },
+        "debugopenmp": {
+          "steps_per_s": 4.162092,
+          "atomsteps_per_s": 2081046.08,
+          "atomsteps_per_proc_s": 2081046.08,
+          "n_runs": 100
+        },
+        "cuda": {
+          "steps_per_s": 12.839639,
+          "atomsteps_per_s": 6419819.76,
+          "atomsteps_per_proc_s": 6419819.76,
+          "n_runs": 100
+        },
+        "debugcuda": {
+          "steps_per_s": 9.295321,
+          "atomsteps_per_s": 4647660.63,
+          "atomsteps_per_proc_s": 4647660.63,
+          "n_runs": 100
+        }
+      }
+    },
+    {
+      "atoms": 1000000,
+      "spaces": {
+        "openmp": {
+          "steps_per_s": 3.733771,
+          "atomsteps_per_s": 3734472.98,
+          "atomsteps_per_proc_s": 3734472.98,
+          "n_runs": 100
+        },
+        "debugopenmp": {
+          "steps_per_s": 1.801329,
+          "atomsteps_per_s": 1801668.02,
+          "atomsteps_per_proc_s": 1801668.02,
+          "n_runs": 100
+        },
+        "cuda": {
+          "steps_per_s": 7.007129,
+          "atomsteps_per_s": 7008445.92,
+          "atomsteps_per_proc_s": 7008445.92,
+          "n_runs": 100
+        },
+        "debugcuda": {
+          "steps_per_s": 5.133305,
+          "atomsteps_per_s": 5134270.36,
+          "atomsteps_per_proc_s": 5134270.36,
+          "n_runs": 100
+        }
+      }
+    }
+  ]
+}

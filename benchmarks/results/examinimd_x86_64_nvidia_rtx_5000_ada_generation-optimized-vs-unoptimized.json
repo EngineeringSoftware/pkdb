@@ -1,0 +1,195 @@
+{
+  "test": "examinimd",
+  "output_file": "results/examinimd_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "6.17.0-19-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32
+    },
+    "ram": {
+      "bytes": 134001274880
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      },
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 1000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 0.8336,
+          "unoptimized_avg": 0.9472
+        }
+      ]
+    },
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 0.9017,
+          "unoptimized_avg": 0.9909
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 1.6107,
+          "unoptimized_avg": 1.6652
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 2.4347,
+          "unoptimized_avg": 2.5303
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 4.1944,
+          "unoptimized_avg": 4.2579
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 4.8674,
+          "unoptimized_avg": 5.2063
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 5.4119,
+          "unoptimized_avg": 5.4696
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 5.5501,
+          "unoptimized_avg": 5.618
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 5.8452,
+          "unoptimized_avg": 5.9263
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 6.1305,
+          "unoptimized_avg": 6.2432
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 6.4404,
+          "unoptimized_avg": 6.5396
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 6.7652,
+          "unoptimized_avg": 6.8478
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 7.0544,
+          "unoptimized_avg": 7.1455
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 12.9159,
+          "unoptimized_avg": 13.1436
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "Cuda",
+          "runs": 10,
+          "normal_avg": 23.9791,
+          "unoptimized_avg": 24.0017
+        }
+      ]
+    }
+  ]
+}
