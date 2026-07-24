@@ -1,0 +1,45 @@
+name: Code Quality
+
+on:
+  push:
+    branches: 
+    - '**'
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint-and-type-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyright pylint black isort
+        cd pkdb && pip install -e .
+    
+    - name: Check code formatting with Black
+      run: |
+        black --check pkdb/
+      continue-on-error: true
+    
+    - name: Check import sorting with isort
+      run: |
+        isort --check-only pkdb/
+      continue-on-error: true
+    
+    - name: Run Pyright type checker
+      run: |
+        pyright pkdb/
+    
+    - name: Run Pylint
+      run: |
+        pylint pkdb/ --exit-zero
+      continue-on-error: true

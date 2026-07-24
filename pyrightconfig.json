@@ -1,0 +1,46 @@
+{
+  "include": [
+    "pkdb",
+    "pykokkos"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "**/*.egg-info",
+    "**/node_modules",
+    ".git",
+    ".venv",
+    "venv",
+    "examples",
+    "pykokkos-base"
+  ],
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Linux",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "none",
+  "reportMissingTypeStubs": false,
+  "reportAttributeAccessIssue": false,
+  "reportUnusedImport": "warning",
+  "reportUnusedClass": "warning",
+  "reportUnusedFunction": "none",
+  "reportUnusedVariable": "warning",
+  "reportDuplicateImport": "warning",
+  "reportOptionalMemberAccess": "warning",
+  "reportOptionalSubscript": "warning",
+  "reportOptionalCall": "warning",
+  "reportPrivateImportUsage": "warning",
+  "reportUndefinedVariable": "error",
+  "reportIncompatibleMethodOverride": "error",
+  "reportIncompatibleVariableOverride": "error",
+  "reportInconsistentConstructor": "error",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "pythonVersion": "3.11",
+      "pythonPlatform": "Linux",
+      "extraPaths": [
+        "pykokkos"
+      ]
+    }
+  ],
+  "reportMissingModuleSource": "warning"
+}

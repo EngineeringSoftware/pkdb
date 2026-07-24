@@ -1,0 +1,23 @@
+# Temporary files
+__pycache__
+pk_cpp/
+*.log
+
+# Build files
+*.egg-info
+build
+dist
+*.bin
+
+pykokkos-base/
+
+# Profiling and log data
+logs.*
+*.log
+*.prof
+
+# Out files 
+*.o
+*.out
+
+examples/*.json
