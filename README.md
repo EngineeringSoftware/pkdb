@@ -24,7 +24,8 @@ Installed target-specific debuggers:
 
 ## Installation
 
-> [!NOTE] Modified version of pykokkos is needed temporarily; code will be merged into the main pykokkos repository shortly
+> [!NOTE]
+> Modified version of pykokkos is needed temporarily; code will be merged into the main pykokkos repository shortly
 
 First, install modified version of
 pykokkos:
