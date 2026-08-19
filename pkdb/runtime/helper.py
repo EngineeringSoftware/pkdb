@@ -227,9 +227,7 @@ def run_script_with_debugger(
         for lineno in line_nums:
             debugger.set_break(abs_file, lineno)
 
-    # Ensure the entry script is always a key in self.breaks so bdb.break_anywhere()
-    # returns True for frames in that file, keeping tracing alive through main()'s
-    # call chain even when the user only set breakpoints in imported modules.
+    # return absolute path of script, removing any unnecessary symbols.
     main_canon = debugger.canonic(script_path)
     debugger.breaks.setdefault(main_canon, [])
 
@@ -248,17 +246,14 @@ def run_script_with_debugger(
     if script_dir and script_dir not in sys.path:
         sys.path.insert(0, script_dir)
 
-    # Compile the script with the real path as co_filename. Do not use debugger.run(string):
-    # Bdb.runctx compiles str sources as "<string>", which makes the first stop <string>(1) and
-    # breaks ``b <lineno>`` / file-relative commands. A pre-built code object preserves the file.
     script_canon = debugger.canonic(script_path)
     with io.open_code(script_path) as fp:
+        # get Python object from file text
         code_obj = compile(fp.read(), script_canon, "exec")
     try:
         debugger.runctx(code_obj, __main__.__dict__, __main__.__dict__)
     finally:
-        # End every attach-helper subprocess kept alive across this run (see
-        # NativeDebuggerSession), however the script/debugger session ended.
+        # at the end always terminate all native compile sessions
         debugger.terminate_native_sessions()
 
 
@@ -274,6 +269,7 @@ def _build_native_handoff(
         script_args=sys.argv[2:],
     )
 
+    # Set active breakpoints (if location if precompiled and reachable)
     for file_path, line_numbers in file_breakpoints.items():
         for line_num in sorted(line_numbers):
             if breakpoint_manager.get_cpp_locations(line_num, source_file=file_path):

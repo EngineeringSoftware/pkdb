@@ -34,7 +34,7 @@ def _parse_args():
 
 
 def _apply_handoff_cpp_to_python(controller, handoff_spec: Optional[Dict[str, Any]]) -> None:
-    """Apply parent-built C++→Python table; no functor file scan."""
+    """Apply parent-built C++ -> Python table; no functor file scan."""
     if not handoff_spec:
         return
     bm = getattr(controller, "breakpoint_manager", None)

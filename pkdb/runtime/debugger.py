@@ -10,7 +10,6 @@ import pdb
 import signal
 import subprocess
 import sys
-import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from types import CodeType
@@ -25,7 +24,7 @@ from ..controllers.gdb_controller import (
     push_control_detach,
     push_control_reattach,
 )
-from ..evaluators.ipc_utils import PKDB_WORKUNIT_PARAM_MAP_KEY
+from ..evaluators.ipc_utils import IPC_JSON_PATH, PKDB_WORKUNIT_PARAM_MAP_KEY
 from ..evaluators.workunit_arg_mapping import build_workunit_param_to_caller_map_from_file
 from .helper import (
     accelerator_info_from_parallel_invocation,
@@ -68,7 +67,6 @@ def _is_pykokkos_source_path(canonic_file: str) -> bool:
         return "pykokkos" in Path(canonic_file).parts
     except (OSError, ValueError):
         return "pykokkos" in canonic_file.replace("\\", "/")
-
 
 
 @dataclass
@@ -447,9 +445,8 @@ class PyKokkosDebugger(PdbCommandsMixin, pdb.Pdb):
 
     def _collect_parallel_launch_ipc(self, frame):
         """
-        At a ``parallel_*`` call (caller frame), collect CuPy IPC handles for ndarray
-        locals, merge into ``pkdb_ipc.json``, and print a short summary (before the
-        dispatch body runs).
+        At `parallel_*` call collect all CuPy IPC tokens, write to internal file
+        and read this file from native debugger
         """
         try:
             import cupy
@@ -462,35 +459,29 @@ class PyKokkosDebugger(PdbCommandsMixin, pdb.Pdb):
 
         for name, value in locals_dict.items():
             if isinstance(value, getattr(cupy, "ndarray", ())):
-                try:
-                    devptr = int(value.data.ptr)
-                    handle = cupy_runtime.ipcGetMemHandle(devptr)  # type: ignore[attr-defined]
-                    if isinstance(handle, (bytes, bytearray)):
-                        handle_repr = handle.hex()
-                    else:
-                        handle_repr = str(handle)
+                devptr = int(value.data.ptr)
+                handle = cupy_runtime.ipcGetMemHandle(devptr)
+                if isinstance(handle, (bytes, bytearray)):
+                    handle_repr = handle.hex()
+                else:
+                    handle_repr = str(handle)
 
-                    ipc_entries[name] = {
-                        "ipc_handle": handle_repr,
-                        "devptr": devptr,
-                        "shape": tuple(int(s) for s in value.shape),
-                        "dtype": str(value.dtype),
-                    }
-                except Exception:
-                    continue
+                ipc_entries[name] = {
+                    "ipc_handle": handle_repr,
+                    "devptr": devptr,
+                    "shape": tuple(int(s) for s in value.shape),
+                    "dtype": str(value.dtype),
+                }
 
         if not ipc_entries:
             return
 
-        out_path = os.path.join(tempfile.gettempdir(), "pkdb_ipc.json")
+        os.makedirs(os.path.dirname(IPC_JSON_PATH), exist_ok=True)
 
         existing: Dict[str, Any] = {}
-        if os.path.exists(out_path):
-            try:
-                with open(out_path, "r") as f:
-                    existing = json.load(f)
-            except Exception:
-                existing = {}
+        if os.path.exists(IPC_JSON_PATH):
+            with open(IPC_JSON_PATH, "r") as f:
+                existing = json.load(f)
 
         existing.update(ipc_entries)
 
@@ -502,11 +493,8 @@ class PyKokkosDebugger(PdbCommandsMixin, pdb.Pdb):
 
         existing[PKDB_WORKUNIT_PARAM_MAP_KEY] = build_workunit_param_to_caller_map_from_file(abs_src, frame.f_lineno)
 
-        try:
-            with open(out_path, "w") as f:
-                json.dump(existing, f, indent=2, sort_keys=True)
-        except Exception:
-            return
+        with open(IPC_JSON_PATH, "w") as f:
+            json.dump(existing, f, indent=2, sort_keys=True)
 
     def _launch_debugger_kind_and_info(self) -> Tuple[str, dict]:
         info = self.native_handoff.accelerator_info if self.native_handoff is not None else None

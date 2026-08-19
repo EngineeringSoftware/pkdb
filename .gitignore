@@ -8,6 +8,7 @@ pk_cpp/
 build
 dist
 *.bin
+.internal/
 
 pykokkos-base/
 

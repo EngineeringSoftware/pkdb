@@ -2,38 +2,34 @@
 IPC token extraction for on-device function evaluation.
 
 Uses CuPy IPC API: cupy.cuda.runtime.ipcGetMemHandle(arr.data.ptr)
-or the generated JSON file (pkdb_ipc.json in temp dir) written when the debugger
-intercepts each ``parallel_*`` dispatch.
+or the generated JSON file (pkdb_ipc.json under the pkdb project's .internal/ipc
+directory) written when the debugger intercepts each ``parallel_*`` dispatch.
 Returns: handle_hex, num_elements, dtype_name, shape.
 """
 
 import math
 import os
+from pathlib import Path
 from typing import Any, Optional
-
-import tempfile
 
 # IPC token: handle_hex, num_elements, dtype_name, shape
 IpcToken = dict
 
 # JSON key for workunit-parameter -> caller-local-name (written at IPC collection time).
+PKDB_ROOT = Path(__file__).resolve().parent.parent
+INTERNAL_DIR = PKDB_ROOT / ".internal"
+IPC_JSON_PATH = INTERNAL_DIR / "pkdb_ipc.json"
 PKDB_WORKUNIT_PARAM_MAP_KEY = "_pkdb_workunit_param_to_caller"
-
-
-def _ipc_json_path() -> str:
-    """Path to the IPC dump JSON written at each traced ``parallel_*`` launch (fixed name in temp dir)."""
-    return os.path.join(tempfile.gettempdir(), "pkdb_ipc.json")
 
 
 def load_ipc_json() -> dict:
     """Load the generated IPC JSON (var_name -> {ipc_handle, devptr, shape, dtype})."""
-    path = _ipc_json_path()
-    if not os.path.exists(path):
+    if not os.path.exists(IPC_JSON_PATH):
         return {}
     try:
         import json
 
-        with open(path, "r") as f:
+        with open(IPC_JSON_PATH, "r") as f:
             return json.load(f)
     except Exception:
         return {}
