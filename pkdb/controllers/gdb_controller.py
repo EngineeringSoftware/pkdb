@@ -12,7 +12,7 @@ from pygdbmi import gdbmiparser
 
 from .pty_handler import PTYHandler
 from .tty_command_line import read_tty_command_line
-from ..core import BreakpointManager, get_debug_properties
+from ..core import BreakpointManager, get_debug_properties, native_debuggers
 from ..core.debug_properties import verbose_out
 from ..commands import register_gdb_commands
 from ..commands.gdb_helpers import (
@@ -334,7 +334,8 @@ class GDBController:
         self._install_attached_breakpoints()
 
     def _get_attach_gdb_cmd(self):
-        return ["gdb", "--interpreter=mi3"]
+        self.gdb_executable = native_debuggers.executable_for("gdb")
+        return [self.gdb_executable, "--interpreter=mi3"]
 
     def _readline_gdb(self):
         """Read and parse one line directly from gdb stdout. Returns None on EOF."""

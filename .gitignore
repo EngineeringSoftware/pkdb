@@ -21,3 +21,6 @@ logs.*
 *.out
 
 examples/*.json
+
+# setup time generated data
+pkdb/core/debugger_paths.py

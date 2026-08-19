@@ -12,6 +12,7 @@ from pygdbmi import gdbmiparser
 
 from .gdb_controller import GDBController
 from ..commands import register_accelerator_commands
+from ..core import native_debuggers
 from ..core.debug_properties import verbose_out
 
 # GDB annotate=3: annotation lines start with two Ctrl-Z (0x1a) then name
@@ -88,13 +89,12 @@ class AcceleratorGDBController(GDBController):
         self.command_prompt = f"(pkdb-{self.accelerator_type}) "
 
         if self.accelerator_type == "hip":
-            self.gdb_executable = "rocgdb"
             self.accelerator_prefix = "hip"
             # TODO: fix to MI3 later, since rocgdb supports mi3 mode, and it's more stable
             self.command_execution_mode = "annotate"
             register_accelerator_commands(self, self.accelerator_prefix)
         else:  # default to cuda
-            self.gdb_executable = "cuda-gdb"
+            self.accelerator_type = "cuda"
             self.accelerator_prefix = "cuda"
             self.command_execution_mode = "annotate"
             register_accelerator_commands(self, self.accelerator_prefix)
@@ -382,10 +382,11 @@ class AcceleratorGDBController(GDBController):
         self._install_attached_breakpoints()
 
     def _get_attach_gdb_cmd(self):
-        # Interface mode set per debugger: cuda-gdb -> annotate3, rocgdb -> mi3
+        self.gdb_executable = native_debuggers.executable_for(self.accelerator_type)
         if self.command_execution_mode == "mi3":
             base = [self.gdb_executable, "--interpreter=mi3", "-ex", "set pagination off"]
         else:
+            # cuda-gdb does not support mi3 mode
             base = [self.gdb_executable, "--annotate=3", "-ex", "set pagination off"]
             # When stdout is a PIPE, cuda-gdb uses full buffering; use stdbuf -oL so each line is flushed
             if shutil.which("stdbuf"):
