@@ -490,22 +490,38 @@ class Runner:
     Runs a benchmark script as a fresh subprocess per (space, script_args) call.
     """
 
-    def __init__(self, timeout: int | None = None, space_flag: str | None = None):
+    def __init__(
+        self,
+        timeout: int | None = None,
+        space_flag: str | None = None,
+        launcher: list[str] | None = None,
+        stdin_text: str | None = None,
+    ):
         self.timeout = timeout
         self.space_flag = space_flag
+        # Interpreter args placed before the script, e.g. ["-m", "pdb"] to run it under a debugger.
+        self.launcher = launcher or []
+        # Fed to the child on stdin; a debugger prompt needs it, a bare run leaves it as None.
+        self.stdin_text = stdin_text
 
     def run_once(self, main_py: Path, space: str, script_args: list[str]) -> tuple[int, str, str]:
         env = os.environ.copy()
         env["PK_EXEC_SPACE"] = env["PK_EXA_SPACE"] = space
         env.pop("PK_KERNEL_PROFILE_PATH", None)  # a stray env var would make runs write profile JSONs
 
-        argv = [sys.executable, str(main_py)]
+        argv = [sys.executable, *self.launcher, str(main_py)]
         if self.space_flag:
             argv += [self.space_flag, space]
         argv += script_args
 
         proc = subprocess.run(
-            argv, cwd=main_py.parent, env=env, capture_output=True, text=True, timeout=self.timeout
+            argv,
+            cwd=main_py.parent,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=self.timeout,
+            input=self.stdin_text,
         )
         return proc.returncode, proc.stdout, proc.stderr
 
