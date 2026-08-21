@@ -541,7 +541,7 @@ class AcceleratorGDBController(GDBController):
             self._close_gdb_master_streams()
             self.pty_handler.stop()
 
-    def start_attached(self, pid: int, ready_file: Optional[str] = None, go_pipe_fd: Optional[int] = None):
+    def start_attached(self, pid: int, ready_fd: Optional[int] = None, go_pipe_fd: Optional[int] = None):
         gdb_cmd = self._get_attach_gdb_cmd()
         self._is_gdb_attached = True
 
@@ -573,7 +573,7 @@ class AcceleratorGDBController(GDBController):
 
         self.pty_handler.start()
         self._setup_gdb(pid)
-        self._signal_ready(ready_file)
+        self._signal_ready(ready_fd)
         # Send "continue" without waiting for prompt so we don't block; _transparent_loop will
         # read output and handle the next prompt (breakpoint hit or inferior exit).
         self._continue_after_attach()

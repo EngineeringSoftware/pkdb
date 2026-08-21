@@ -3,8 +3,6 @@ import json
 import signal
 import subprocess
 import sys
-import tempfile
-import time
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from pygdbmi import gdbmiparser
@@ -42,17 +40,17 @@ def _allow_ptrace_attach():
         pass
 
 
-def _wait_for_ready_file(proc: subprocess.Popen, ready_file: str):
-    while True:
-        if os.path.exists(ready_file):
-            try:
-                os.unlink(ready_file)
-            except OSError:
-                pass
-            return
-        if proc.poll() is not None:
-            return
-        time.sleep(0.05)
+def _wait_for_ready(ready_read_fd: int) -> None:
+    """Block until the helper signals ready, or until it dies.
+
+    The helper writes one byte once its gdb is set up; if it exits first, every write end of
+    the pipe closes and the read returns EOF. Both outcomes are a real event, so this never
+    needs a timeout or a poll interval.
+    """
+    try:
+        os.read(ready_read_fd, 1)
+    finally:
+        os.close(ready_read_fd)
 
 
 # Attaches native debugger (gdb / cuda-gdb / rocgdb) to our debuggee process and
@@ -64,13 +62,6 @@ def launch_attached_debugger(
     handoff_payload: Optional[Dict[str, Any]] = None,
 ):
     _allow_ptrace_attach()
-
-    ready_file = os.path.join(tempfile.gettempdir(), f"pkdb_gdb_controller_ready_{pid}")
-    try:
-        if os.path.exists(ready_file):
-            os.unlink(ready_file)
-    except OSError:
-        pass
 
     debugger_name = "GDB controller"
     if accelerator_info is not None:
@@ -85,8 +76,6 @@ def launch_attached_debugger(
         str(pid),
         "--script-path",
         script_path,
-        "--ready-file",
-        ready_file,
     ]
 
     # forward all original script arguments (sys.argv[1:]) to the helper
@@ -123,10 +112,14 @@ def launch_attached_debugger(
     # applied update; EOF (helper death) unblocks the waiting pusher.
     bp_ack_read_fd, bp_ack_write_fd = os.pipe()
     cmd.extend(["--bp-ack-fd", str(bp_ack_write_fd)])
-    proc = subprocess.Popen(cmd, cwd=cwd, start_new_session=True, pass_fds=(bp_ack_write_fd,))
+    # Ready pipe: the helper writes one byte when its gdb is up; EOF covers it dying first.
+    ready_read_fd, ready_write_fd = os.pipe()
+    cmd.extend(["--ready-fd", str(ready_write_fd)])
+    proc = subprocess.Popen(cmd, cwd=cwd, start_new_session=True, pass_fds=(bp_ack_write_fd, ready_write_fd))
     os.close(bp_ack_write_fd)
+    os.close(ready_write_fd)
     setattr(proc, "pkdb_bp_ack_read_fd", bp_ack_read_fd)
-    _wait_for_ready_file(proc, ready_file)
+    _wait_for_ready(ready_read_fd)
     return proc
 
 
@@ -350,12 +343,13 @@ class GDBController:
         except Exception:
             return None
 
-    def _signal_ready(self, ready_file: Optional[str]) -> None:
-        if ready_file:
-            with open(ready_file, "w"):
-                pass
+    def _signal_ready(self, ready_fd: Optional[int]) -> None:
+        """Unblock the parent waiting in `_wait_for_ready`; the close hands it EOF if we die later."""
+        if ready_fd is not None:
+            os.write(ready_fd, b"\x01")
+            os.close(ready_fd)
 
-    def start_attached(self, pid: int, ready_file: Optional[str] = None):
+    def start_attached(self, pid: int, ready_fd: Optional[int] = None):
         gdb_cmd = self._get_attach_gdb_cmd()
         self._is_gdb_attached = True
 
@@ -371,7 +365,7 @@ class GDBController:
         self.running = True
         self._install_breakpoint_update_signal_handler()
         self._setup_gdb(debug_pid=pid)
-        self._signal_ready(ready_file)
+        self._signal_ready(ready_fd)
         self._send_mi_command("exec-continue")
         self._transparent_loop()
 

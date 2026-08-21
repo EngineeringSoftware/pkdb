@@ -20,7 +20,7 @@ def _parse_args():
     parser = argparse.ArgumentParser(description="Attach GDBController to a running pkdb PID")
     parser.add_argument("--pid", type=int, required=True)
     parser.add_argument("--script-path", required=True)
-    parser.add_argument("--ready-file", required=True)
+    parser.add_argument("--ready-fd", type=int, default=None)
     parser.add_argument("--script-arg", action="append", default=[])
     parser.add_argument("--handoff-shm-name", default="")
     parser.add_argument("--handoff-shm-nbytes", type=int, default=0)
@@ -105,7 +105,7 @@ def main() -> int:
     if args.verbose:
         controller.debug_properties.verbose = True
     _apply_handoff_cpp_to_python(controller, handoff_spec)
-    controller.start_attached(args.pid, ready_file=args.ready_file)
+    controller.start_attached(args.pid, ready_fd=args.ready_fd)
     return 0
 
 
