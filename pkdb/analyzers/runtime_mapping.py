@@ -1,6 +1,6 @@
 """
-Runtime analysis tools for ``debugger.py``: Python workunit lines → C++ via ``PY_LINE_MARKER``
-under a PyKokkos ``Debug*`` bundle directory.
+Runtime analysis tools for `debugger.py`: Python workunit lines -> C++ via `PY_LINE_MARKER`
+under a PyKokkos `Debug*` bundle directory.
 """
 
 from __future__ import annotations
@@ -20,37 +20,23 @@ class RuntimeBundleMapping:
     def __init__(self, script_path: str) -> None:
         self._script_path = script_path
 
-    @staticmethod
-    def iter_bundle_cpp_mapping_files(bundle_output_dir: Path) -> List[Path]:
-        """``functor.hpp`` beside the ``DebugCuda``/``DebugHIP``/``DebugOpenMP`` dir plus sources under the bundle."""
-        out: List[Path] = []
+    # List of files that we  are intersted at.
+    _SOURCES_BESIDE_BUNDLE = ("functor.hpp", "functor_cast.hpp")
+    _SOURCES_IN_BUNDLE = ("bindings.cpp",)
+
+    @classmethod
+    def iter_bundle_cpp_mapping_files(cls, bundle_output_dir: Path) -> List[Path]:
+        """The generated sources for one bundle - `functor.hpp`/`functor_cast.hpp` beside the
+        `DebugCuda`/`DebugHIP`/`DebugOpenMP` dir, plus `bindings.cpp` inside it."""
         try:
             od = bundle_output_dir.resolve()
         except OSError:
             od = bundle_output_dir
         if not od.is_dir():
-            return out
-        try:
-            for p in od.parent.glob("*.hpp"):
-                out.append(p)
-        except OSError:
-            pass
-        for pat in ("*.hpp", "*.cpp", "*.cu", "*.cuh"):
-            try:
-                out.extend(od.rglob(pat))
-            except OSError:
-                pass
-        seen: set[Path] = set()
-        uniq: List[Path] = []
-        for p in out:
-            try:
-                r = p.resolve()
-            except OSError:
-                r = p
-            if r not in seen:
-                seen.add(r)
-                uniq.append(r)
-        return uniq
+            return []
+        candidates = [od.parent / name for name in cls._SOURCES_BESIDE_BUNDLE]
+        candidates += [od / name for name in cls._SOURCES_IN_BUNDLE]
+        return [p for p in candidates if p.is_file()]
 
     def resolve_overlap(
         self,

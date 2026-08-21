@@ -9,6 +9,25 @@ from pathlib import Path
 from typing import Any, Set, Optional, Callable, Dict, List, Tuple
 from ..core.debug_properties import verbose_out
 
+# Compiled once: load_line_mapping runs on every kernel launch.
+_MARKER_PATTERN = re.compile(r"//\s*PY_LINE_MARKER_(.+)")
+_MARKER_CACHE: Dict[str, Tuple[int, int, List[Tuple[int, str, int]]]] = {}
+_RESOLVED_PATHS: Dict[str, str] = {}
+
+
+def _resolved_str(path) -> str:
+    """`str(Path(path).resolve())`, memoized; falls back to the path as given if it cannot resolve."""
+    key = str(path)
+    cached = _RESOLVED_PATHS.get(key)
+    if cached is not None:
+        return cached
+    try:
+        resolved = str(Path(key).resolve())
+    except (OSError, ValueError):
+        resolved = key
+    _RESOLVED_PATHS[key] = resolved
+    return resolved
+
 
 class BreakpointManager:
     """
@@ -212,6 +231,42 @@ class BreakpointManager:
             return None
         return (file_path, python_line)
 
+    @classmethod
+    def _load_markers(cls, path: Path) -> List[Tuple[int, str, int]]:
+        """
+        Parsed `(cpp_line, python_file, python_line)` markers for *path*, cached across
+        BreakpointManager instances and invalidated when the file's mtime or size changes.
+        """
+        try:
+            st = path.stat()
+        except OSError:
+            return []
+
+        key = str(path)
+        cached = _MARKER_CACHE.get(key)
+        if cached is not None and cached[0] == st.st_mtime_ns and cached[1] == st.st_size:
+            return cached[2]
+
+        try:
+            with open(path, "r") as f:
+                lines = f.readlines()
+        except OSError:
+            return []
+
+        markers: List[Tuple[int, str, int]] = []
+        for cpp_line_num, line in enumerate(lines, start=1):
+            match = _MARKER_PATTERN.search(line)
+            if not match:
+                continue
+            parsed = cls._parse_py_line_marker_payload(match.group(1))
+            if parsed is None:
+                continue
+            file_path, python_line = parsed
+            markers.append((cpp_line_num, file_path, python_line))
+
+        _MARKER_CACHE[key] = (st.st_mtime_ns, st.st_size, markers)
+        return markers
+
     def load_line_mapping(self, functor_file_path: Path) -> bool:
         """
         Load line mapping from a C++ functor file by parsing PY_LINE_MARKER comments.
@@ -227,21 +282,9 @@ class BreakpointManager:
         kernel_name = self._kernel_name_from_functor_path(functor_file_path)
         self._kernel_to_path[kernel_name] = resolved_path
 
-        with open(functor_file_path, "r") as f:
-            lines = f.readlines()
-
-        marker_pattern = re.compile(r"//\s*PY_LINE_MARKER_(.+)")
         functor_cpp_mapping: Dict[int, Tuple[str, int]] = {}
 
-        for cpp_line_num, line in enumerate(lines, start=1):
-            match = marker_pattern.search(line)
-            if not match:
-                continue
-            parsed = self._parse_py_line_marker_payload(match.group(1))
-            if parsed is None:
-                continue
-            file_path, python_line = parsed
-
+        for cpp_line_num, file_path, python_line in self._load_markers(resolved_path):
             if cpp_line_num > 1:
                 # Primary mapping: (file, line) -> [(functor, cpp_line), ...]
                 key = (file_path, python_line)
@@ -255,8 +298,8 @@ class BreakpointManager:
 
     def apply_handoff_cpp_to_python(self, entries: List[Dict[str, Any]]) -> None:
         """
-        Install C++→Python locations from the pdb→device handoff JSON (this launch / bundle only).
-        No functor file parsing — parent already resolved markers for the current parallel workunit.
+        Install C++ -> Python locations from the pdb -> device handoff JSON (this launch / bundle only).
+        No functor file parsing - parent already resolved markers for the current parallel workunit.
         """
         for e in entries:
             if not isinstance(e, dict):
@@ -268,14 +311,8 @@ class BreakpointManager:
                 py_line = int(e["py_line"])
             except (KeyError, TypeError, ValueError):
                 continue
-            try:
-                cpp_path = Path(cpp_file).resolve()
-            except OSError:
-                cpp_path = Path(cpp_file)
-            try:
-                py_resolved = str(Path(py_file).resolve())
-            except OSError:
-                py_resolved = py_file
+            cpp_path = Path(_resolved_str(cpp_file))
+            py_resolved = _resolved_str(py_file)
 
             if cpp_path not in self._functor_cpp_to_python:
                 self._functor_cpp_to_python[cpp_path] = {}
@@ -291,25 +328,17 @@ class BreakpointManager:
         """
         Build the shared-memory handoff dict for the attach helper.
 
-        Includes every (Python file, line) → C++ location from loaded functor markers,
+        Includes every (Python file, line) -> C++ location from loaded functor markers,
         not only lines that had user breakpoints at JIT time. Without this, breakpoints
         set from cuda-gdb/rocgdb after attach cannot resolve lines that were not part of
         the initial overlap bundle.
         """
         merged_cpp: Dict[Tuple[str, int], List[List[Any]]] = {}
         for (py_fp, py_ln), cpp_locs in self._python_to_cpp.items():
-            try:
-                py_resolved = str(Path(py_fp).resolve())
-            except (OSError, ValueError):
-                py_resolved = str(py_fp)
-            pkey = (py_resolved, int(py_ln))
+            pkey = (_resolved_str(py_fp), int(py_ln))
             acc = merged_cpp.setdefault(pkey, [])
             for p, ln in cpp_locs:
-                try:
-                    ps = str(Path(p).resolve())
-                except OSError:
-                    ps = str(p)
-                pair: List[Any] = [ps, int(ln)]
+                pair: List[Any] = [_resolved_str(p), int(ln)]
                 if pair not in acc:
                     acc.append(pair)
 
@@ -353,34 +382,22 @@ class BreakpointManager:
         """
         Drop stale pk_cpp variants so GDB breakpoints match the kernel pkdb actually runs.
 
-        PyKokkos emits sibling ``types_*`` trees (e.g. one with ``Cuda/``, one with ``DebugCuda/``).
+        PyKokkos emits sibling `types_*` trees (e.g. one with `Cuda/`, one with `DebugCuda/`).
         pkdb JIT-promotes Cuda/HIP/OpenMP to Debug* before launch, so only the Debug* shared
         library loads; breakpoints on the non-debug functor never bind.
 
-        Also restrict to ``pk_cpp/<script_stem>/`` so artifacts from other scripts in the same
-        directory are not used.
+        There is deliberately no `pk_cpp` subtree check: every location reaching here already
+        comes from the bundle `Runtime.execute_workunit` named for this launch, or from a
+        handoff payload built the same way. The check this replaces compared the component
+        after `pk_cpp` against the script stem, which only holds when the script sits directly
+        in the working directory - PyKokkos mirrors the *workunit* source path under `pk_cpp/`
+        (`src/input.py` -> `pk_cpp/src/input/...`), so it discarded every location for a script
+        kept in a subdirectory.
         """
         if not locations:
             return locations
 
-        script_stem: Optional[str] = None
-        if self._script_path:
-            script_stem = Path(self._script_path).stem
-
-        filtered: List[Tuple[Path, int]] = []
-        for functor_path, cpp_line in locations:
-            fp = Path(functor_path)
-            if script_stem:
-                parts = fp.parts
-                if "pk_cpp" in parts:
-                    i = parts.index("pk_cpp")
-                    if i + 1 < len(parts) and parts[i + 1] != script_stem:
-                        verbose_out(f"[BP_MANAGER] Skip functor outside script pk_cpp tree ({script_stem!r}): {fp}")
-                        continue
-            filtered.append((fp, cpp_line))
-
-        if not filtered:
-            return filtered
+        filtered: List[Tuple[Path, int]] = [(Path(fp), cpp_line) for fp, cpp_line in locations]
 
         if any(self._types_dir_has_debug_backend(self._functor_types_dir(p)) for p, _ in filtered):
             kept = [(p, ln) for p, ln in filtered if self._types_dir_has_debug_backend(self._functor_types_dir(p))]
