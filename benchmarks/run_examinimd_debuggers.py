@@ -1,24 +1,9 @@
 #!/usr/bin/env python3
 """
-Benchmark ExaMiniMD under `python -m pdb` vs. `python -m pkdb`, one execution space at a time.
+Benchmark ExaMiniMD under pdb vs. `python -m pkdb`, one execution space at a time.
 
-Both debuggers get the same PK_EXEC_SPACE, so a results row is pdb_avg vs. pkdb_avg for that
-one space. Prefer the Debug* names (the default): pkdb promotes a plain `Cuda` to `DebugCuda`
-but pdb does not, so `--spaces Cuda` would compare an optimized build against a `-G -O0` one.
-Naming `DebugCuda` outright pins both sides to the same compiled bundle and leaves the debugger
-as the only difference. Plain names are still accepted for the promoting comparison.
-
-Neither debugger is interactive here. Each child is fed `continue` (run the script to
-completion) then `quit` on stdin; pdb otherwise restarts the program when it finishes.
-
-A run is timed two ways. `pdb_avg` / `pkdb_avg` are wall clock for the whole subprocess - the
-metric that matters, since a debugger's cost is mostly outside the kernels (pkdb attaches a
-native debugger per workunit, and that attach is invisible to kernel timings). `*_kernel_avg`
-keeps the sum of the Total(s) column of ExaMiniMD's kernel profile table, for comparison with
-run_examinimd.py. Every run is a fresh subprocess, for the same reasons as run_examinimd.py: pykokkos caches
-compiled-module bindings per process without keying them by execution space, and fresh
-processes keep timings independent. Timing results are checkpointed to JSON after each atom
-size, folding into any existing file at the same path.
+Neither debugger is interactive here. Each child is fed a breakpoint on the script's first line,
+then `continue` and `quit` on stdin; pdb otherwise restarts the program when it finishes.
 """
 
 import argparse
@@ -43,7 +28,6 @@ DEFAULT_SPACES = ["DebugOpenMP", "DebugCuda"]
 # Atom counts passed to ExaMiniMD via --atoms. Small next to run_examinimd.py's list: every
 # run here pays Python-level tracing on top of the kernels, so the wall clock is far higher.
 ATOM_SIZES = [
-    1_000,
     4_000,
     32_000,
     108_000,
@@ -66,18 +50,20 @@ ATOM_SIZES = [
 N_RUNS = 3
 TIMEOUT = 3600  # seconds per ExaMiniMD run
 
-# Drives the script to completion, then leaves the debugger instead of letting pdb restart it.
-DEBUGGER_STDIN = "continue\nquit\n"
-
 BENCHMARKS_DIR = Path(__file__).resolve().parent
+# Renamed with the pdb baseline: write_checkpoint folds into any file it finds.
 PREFIX = "examinimd_debuggers"
 
 # One entry per JSON column; the plain runner is used only to precompile the pk_cpp bundles.
-DEBUGGERS = [
-    ("pdb", Runner(timeout=TIMEOUT, launcher=["-m", "pdb"], stdin_text=DEBUGGER_STDIN)),
-    ("pkdb", Runner(timeout=TIMEOUT, launcher=["-m", "pkdb"], stdin_text=DEBUGGER_STDIN)),
-]
+DEBUGGERS = [("pdb", ["-m", "pdb"]), ("pkdb", ["-m", "pkdb"])]
 WARMUP_RUNNER = Runner(timeout=TIMEOUT)
+
+
+def debugger_stdin(script: Path) -> str:
+    """Break at the script's first line, run to the end, then leave the debugger."""
+    code = compile(script.read_text(encoding="utf-8"), str(script), "exec")
+    first = min(ln for _, _, ln in code.co_lines() if ln)
+    return f"break {script}:{first}\ncontinue\nquit\n"
 
 
 def run_n_times(
@@ -159,6 +145,8 @@ def main() -> None:
         sys.exit("Error: --atom-sizes is empty (no sizes to run).")
 
     runs = args.runs
+    stdin_text = debugger_stdin(script)
+    debuggers = [(label, Runner(timeout=TIMEOUT, launcher=lc, stdin_text=stdin_text)) for label, lc in DEBUGGERS]
 
     system_info, suf = system_and_suffix()
     output, log_path = resolve_output_paths(args, PREFIX, suf)
@@ -177,7 +165,7 @@ def main() -> None:
         for space in spaces:
             avgs = {
                 label: run_n_times(runner, label, script, space, size_args, log_path, runs)
-                for label, runner in DEBUGGERS
+                for label, runner in debuggers
             }
             row: dict = {"backend": space, "runs": runs}
             for label, (wall, kernel) in avgs.items():
@@ -201,7 +189,7 @@ def main() -> None:
             output,
             [{"atoms": atoms, "backends": rows}],
             x_key="atoms",
-            test="examinimd_debuggers",
+            test=PREFIX,
             system=system_info,
         )
         print(f"  checkpoint: wrote atoms={atoms} -> {output.name}")
