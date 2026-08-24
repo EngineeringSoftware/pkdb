@@ -530,22 +530,23 @@ class GDBController:
                 try:
                     if self.process.stdin is not None:
                         self.process.stdin.close()
-                except Exception:
-                    pass
+                except Exception as e:
+                    verbose_out(f"stop: closing stdin of already-exited gdb failed: {e}")
                 self.process = None
                 return
             try:
-                if self.process.stdin is not None:
-                    if self._is_gdb_attached:
-                        self.process.stdin.write("detach\n")
-                        self.process.stdin.flush()
-                    self.process.stdin.write("quit\n")
-                    self.process.stdin.flush()
-                self.process.wait()
-            except Exception:
-                if self.process.poll() is None:
-                    self.process.terminate()
+                if self._is_gdb_attached:
+                    os.kill(self.process.pid, signal.SIGINT)
+                    self._send_mi_command("target-detach")
+            except Exception as e:
+                verbose_out(f"stop: interrupt/detach failed, falling back to kill: {e}")
             finally:
-                if self.process and self.process.stdin is not None:
-                    self.process.stdin.close()
+                if self.process.poll() is None:
+                    self.process.kill()
+                self.process.wait()
+                if self.process.stdin is not None:
+                    try:
+                        self.process.stdin.close()
+                    except Exception as e:
+                        verbose_out(f"stop: closing gdb stdin failed: {e}")
             self.process = None
