@@ -12,14 +12,16 @@
 # ------------------
 
 if [ -z "$1" ] && [ -z "$2" ]; then
-    printf "Script requires two paths: \n\t(1) run_ewald_debuggers.py script path\n"
-    exit 1
+    printf "Script requires two paths: \n\t(1) run_ewald.py script path\n\t(2) stokes1p.py of ewald benchmark.\n"
+	exit 1
 fi
 
+EWALD_MAIN="$2"
 EWALD_RUNNER="$1"
 
 eval "$(conda shell.bash hook)"
 conda activate pkdb
 
 export CXX=hipcc
-python "$EWALD_RUNNER" --spaces "HIP, DebugHIP"
+export OMP_NUM_THREADS="$(nproc)"
+python "$EWALD_RUNNER" "$EWALD_MAIN" --spaces "OpenMP, DebugOpenMP, HIP, DebugHIP"
