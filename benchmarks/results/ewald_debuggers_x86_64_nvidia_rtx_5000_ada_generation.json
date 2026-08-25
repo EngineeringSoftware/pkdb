@@ -1,0 +1,324 @@
+{
+  "test": "ewald_debuggers",
+  "output_file": "/home/sifi/pkdb/benchmarks/results/ewald_debuggers_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "7.0.0-28-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32
+    },
+    "ram": {
+      "bytes": 133997826048
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      },
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 2.749,
+          "pdb_kernel_avg": 0.2671,
+          "pkdb_avg": 12.4538,
+          "pkdb_kernel_avg": 0.769
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 2.179,
+          "pdb_kernel_avg": 0.2121,
+          "pkdb_avg": 9.9784,
+          "pkdb_kernel_avg": 0.556
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 3.5511,
+          "pdb_kernel_avg": 0.4265,
+          "pkdb_avg": 13.2055,
+          "pkdb_kernel_avg": 0.9097
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 7.3005,
+          "pdb_kernel_avg": 1.2401,
+          "pkdb_avg": 14.9983,
+          "pkdb_kernel_avg": 1.5765
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 7.7807,
+          "pdb_kernel_avg": 1.2672,
+          "pkdb_avg": 17.6964,
+          "pkdb_kernel_avg": 1.8001
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 27.7124,
+          "pdb_kernel_avg": 5.2983,
+          "pkdb_avg": 35.7721,
+          "pkdb_kernel_avg": 5.6992
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 15.4833,
+          "pdb_kernel_avg": 2.811,
+          "pkdb_avg": 24.9792,
+          "pkdb_kernel_avg": 3.2511
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 64.2738,
+          "pdb_kernel_avg": 12.5718,
+          "pkdb_avg": 73.3569,
+          "pkdb_kernel_avg": 13.0473
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 16.6603,
+          "pdb_kernel_avg": 3.0517,
+          "pkdb_avg": 26.3256,
+          "pkdb_kernel_avg": 3.5432
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 70.8417,
+          "pdb_kernel_avg": 14.0498,
+          "pkdb_avg": 78.9188,
+          "pkdb_kernel_avg": 14.3386
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 17.7152,
+          "pdb_kernel_avg": 3.2588,
+          "pkdb_avg": 28.4515,
+          "pkdb_kernel_avg": 3.9287
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 79.9723,
+          "pdb_kernel_avg": 15.969,
+          "pkdb_avg": 87.2292,
+          "pkdb_kernel_avg": 15.9991
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 20.8027,
+          "pdb_kernel_avg": 3.8783,
+          "pkdb_avg": 30.7884,
+          "pkdb_kernel_avg": 4.4068
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 90.3835,
+          "pdb_kernel_avg": 17.7955,
+          "pkdb_avg": 97.7931,
+          "pkdb_kernel_avg": 17.9167
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 22.5428,
+          "pdb_kernel_avg": 4.2214,
+          "pkdb_avg": 31.1441,
+          "pkdb_kernel_avg": 4.5088
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 97.4845,
+          "pdb_kernel_avg": 19.2325,
+          "pkdb_avg": 103.7294,
+          "pkdb_kernel_avg": 19.5701
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 23.4145,
+          "pdb_kernel_avg": 4.3966,
+          "pkdb_avg": 32.9575,
+          "pkdb_kernel_avg": 4.8767
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 99.6788,
+          "pdb_kernel_avg": 19.672,
+          "pkdb_avg": 109.3781,
+          "pkdb_kernel_avg": 20.782
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 24.4798,
+          "pdb_kernel_avg": 4.6171,
+          "pkdb_avg": 34.2069,
+          "pkdb_kernel_avg": 5.1214
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 109.8143,
+          "pdb_kernel_avg": 21.6192,
+          "pkdb_avg": 115.0555,
+          "pkdb_kernel_avg": 21.5231
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 25.7738,
+          "pdb_kernel_avg": 4.8727,
+          "pkdb_avg": 35.3222,
+          "pkdb_kernel_avg": 5.3415
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 111.9267,
+          "pdb_kernel_avg": 22.1157,
+          "pkdb_avg": 119.5566,
+          "pkdb_kernel_avg": 22.3529
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 26.9188,
+          "pdb_kernel_avg": 5.0991,
+          "pkdb_avg": 36.8515,
+          "pkdb_kernel_avg": 5.6374
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 122.5447,
+          "pdb_kernel_avg": 24.0971,
+          "pkdb_avg": 126.8626,
+          "pkdb_kernel_avg": 23.9429
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 52.9636,
+          "pdb_kernel_avg": 10.3105,
+          "pkdb_avg": 63.4562,
+          "pkdb_kernel_avg": 10.9222
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 243.0842,
+          "pdb_kernel_avg": 48.0949,
+          "pkdb_avg": 247.9178,
+          "pkdb_kernel_avg": 48.5339
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 104.9358,
+          "pdb_kernel_avg": 20.7914,
+          "pkdb_avg": 115.0816,
+          "pkdb_kernel_avg": 21.426
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 478.679,
+          "pdb_kernel_avg": 95.1503,
+          "pkdb_avg": 481.993,
+          "pkdb_kernel_avg": 94.9437
+        }
+      ]
+    }
+  ]
+}
