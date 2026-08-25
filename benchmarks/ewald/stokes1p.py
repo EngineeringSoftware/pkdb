@@ -6,6 +6,7 @@ layer potential with one periodic direction.
 """
 
 import argparse
+import sys
 import pykokkos as pk
 import parkipy
 
@@ -56,4 +57,4 @@ if __name__ == "__main__":
         "--atoms", dest="atoms", type=int, required=True, help="Number of atoms/particles for Ewald summation"
     )
     args = parser.parse_args()
-    exit(main(args))
+    sys.exit(main(args))
