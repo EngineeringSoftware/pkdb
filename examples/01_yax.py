@@ -1,5 +1,4 @@
-import json
-import cupy as cp
+import numpy as cp
 import pykokkos as pk
 
 @pk.workunit
@@ -19,7 +18,7 @@ def run() -> None:
 
     policy = pk.RangePolicy(pk.ExecutionSpace.Cuda, 0, N)
     result = pk.parallel_reduce(policy, yAx, cols=M, y_view=y, x_view=x, A_view=A)
-    json.dump({"result": float(result)}, open("01_yax_result.json", "w"))
+    print(result)
 
 
 if __name__ == "__main__":
