@@ -21,9 +21,31 @@ from helpers import (
     system_and_suffix,
     write_checkpoint,
 )
-from run_examinimd import parse_total_seconds
 
 DEFAULT_SPACES = ["DebugOpenMP", "DebugCuda"]
+
+
+def parse_total_seconds(stdout: str) -> float | None:
+    """Sum the Total(s) column of the kernel profile table ExaMiniMD prints."""
+    total = 0.0
+    found = False
+    in_table = False
+    for line in stdout.splitlines():
+        stripped = line.strip()
+        if not in_table:
+            in_table = stripped.startswith("Kernel") and "Total(s)" in stripped and "Avg(ms)" in stripped
+            continue
+        if not stripped:
+            break
+        parts = stripped.split()
+        # Data rows look like: <name> <Count> <Total(s)> <Avg(ms)> <Percent%>
+        if len(parts) >= 5 and parts[-1].endswith("%") and parts[-4].isdigit():
+            try:
+                total += float(parts[-3])
+                found = True
+            except ValueError:
+                pass
+    return total if found else None
 
 # Atom counts passed to ExaMiniMD via --atoms. Small next to run_examinimd.py's list: every
 # run here pays Python-level tracing on top of the kernels, so the wall clock is far higher.

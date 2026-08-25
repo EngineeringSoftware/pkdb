@@ -7,6 +7,7 @@ then `continue` and `quit` on stdin; pdb otherwise restarts the program when it 
 """
 
 import argparse
+import re
 import subprocess
 import sys
 import time
@@ -21,9 +22,60 @@ from helpers import (
     system_and_suffix,
     write_checkpoint,
 )
-from run_ewald import parse_walltimes
 
 DEFAULT_SPACES = ["DebugOpenMP", "DebugCuda"]
+
+KERNEL_KEYS = ["P2P", "P2G", "FFT", "CNV", "IFFT", "G2P"]
+
+
+def parse_walltimes(stdout: str) -> dict[str, float | None] | None:
+    """Last "Ewald Walltimes" section: TOTAL plus each KERNEL_KEYS component's "tot" value."""
+    lines = [re.sub(r"\x1b\[[0-9;]*m", "", line).strip() for line in stdout.splitlines()]
+
+    start = None
+    for i in range(len(lines) - 1, -1, -1):
+        if "Ewald Walltimes" in lines[i]:
+            start = i
+            break
+    if start is None:
+        return None
+
+    end = len(lines)
+    for i in range(start + 1, len(lines)):
+        if "Ewald Cost Model" in lines[i]:
+            end = i
+            break
+
+    result: dict[str, float | None] = {
+        "TOTAL": None,
+        **{key: None for key in KERNEL_KEYS},
+    }
+    component = None
+    for line in lines[start + 1 : end]:
+        header = re.match(r"^(P2P|P2G|FFT|CNV|IFFT|G2P)\s*:", line)
+        if header:
+            component = header.group(1)
+            continue
+
+        m_total = re.match(r"^TOTAL:\s*([0-9eE+\-.]+)", line)
+        if m_total:
+            try:
+                result["TOTAL"] = float(m_total.group(1))
+            except ValueError:
+                pass
+            component = None
+            continue
+
+        if component is not None:
+            m_tot = re.search(r"['\"]?tot['\"]?\s*:\s*([0-9eE+\-.]+)", line)
+            if m_tot:
+                try:
+                    result[component] = float(m_tot.group(1))
+                except ValueError:
+                    pass
+                component = None
+
+    return result
 
 # Atom counts passed to Ewald via --atoms. Every run here pays Python-level tracing on top of the
 # kernels, so the wall clock is far higher than run_ewald.py's own timing.
