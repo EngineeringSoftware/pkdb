@@ -13,16 +13,15 @@
 # ------------------
 
 if [ -z "$1" ] || [ -z "$2" ]; then
-    printf "Script requires two paths: \n\t(1) apptainer directory (holds conda_git.sif)\n\t(2) pkdb root directory\n"
+    printf "Script requires two paths: \n\t(1) apptainer .sif image path\n\t(2) pkdb root directory\n"
     exit 1
 fi
 
-APPTAINER_DIR="$(realpath "$1")"
+APPTAINER_PATH="$(realpath "$1")"
 PKDB_ROOT="$(realpath "$2")"
 
 module load tacc-apptainer
-pushd "$APPTAINER_DIR"
-apptainer exec --nv --fakeroot conda_git.sif bash -c '
+apptainer exec --nv --fakeroot "$APPTAINER_PATH" bash -c '
     set -e
     export CUDACXX=/opt/conda/bin/nvcc
     export CXX=/usr/bin/g++
@@ -35,5 +34,4 @@ apptainer exec --nv --fakeroot conda_git.sif bash -c '
     python run_examinimd_debuggers.py --spaces "DebugCuda, DebugOpenMP"
 ' _ "$PKDB_ROOT"
 
-popd
 echo "Done."
