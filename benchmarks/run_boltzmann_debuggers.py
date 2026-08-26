@@ -7,6 +7,7 @@ then `continue` and `quit` on stdin; pdb otherwise restarts the program when it 
 """
 
 import argparse
+import re
 import subprocess
 import sys
 import time
@@ -21,9 +22,20 @@ from helpers import (
     system_and_suffix,
     write_checkpoint,
 )
-from run_boltzmann import parse_total_time_s
 
 DEFAULT_SPACES = ["DebugOpenMP", "DebugCuda"]
+
+
+def parse_total_time_s(stdout: str) -> float | None:
+    """Last "total time = <float>" line (warmup + RESET produce an earlier one)."""
+    matches = list(
+        re.finditer(
+            r"^total time = ([0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)\s*$",
+            stdout,
+            re.MULTILINE,
+        )
+    )
+    return float(matches[-1].group(1)) if matches else None
 
 # Step counts passed to boltzmann/main.py via -s. Every run here pays Python-level tracing on top
 # of the kernels, so the wall clock is far higher than run_boltzmann.py's own timing.
