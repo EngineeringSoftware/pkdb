@@ -29,6 +29,7 @@ apptainer exec --nv --fakeroot "$APPTAINER_PATH" bash -c '
     eval "$(conda shell.bash hook)"
     conda activate pkdb
 
+    export OMP_NUM_THREADS=72
     BENCH_ROOT="$(realpath "$1/benchmarks")"
     cd "$BENCH_ROOT"
     python run_examinimd_debuggers.py --spaces "DebugCuda, DebugOpenMP"
