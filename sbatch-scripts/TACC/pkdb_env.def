@@ -1,0 +1,44 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%environment
+    export PATH="/opt/conda/bin:$PATH"
+
+%post
+    set -e
+
+    # Set apt downloads to root user env
+    echo 'APT::Sandbox::User "root";' > /etc/apt/apt.conf.d/99no-sandbox
+    apt-get update
+
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        wget \
+        bzip2 \
+        ca-certificates \
+        git \
+        gdb \
+        build-essential
+
+    # Install miniconda
+    ARCH=$(uname -m)
+    case "${ARCH}" in
+        x86_64)  MINICONDA_ARCH="x86_64" ;;
+        aarch64|arm64) MINICONDA_ARCH="aarch64" ;;
+        *) echo "Unsupported architecture: ${ARCH}" >&2; exit 1 ;;
+    esac
+    MINICONDA_INSTALLER=Miniconda3-latest-Linux-${MINICONDA_ARCH}.sh
+    wget -q https://repo.anaconda.com/miniconda/${MINICONDA_INSTALLER} -O /tmp/${MINICONDA_INSTALLER}
+    bash /tmp/${MINICONDA_INSTALLER} -b -p /opt/conda
+    rm /tmp/${MINICONDA_INSTALLER}
+    export PATH="/opt/conda/bin:$PATH"
+
+    # conda TOS and prerequisites
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+    conda install -y -c nvidia cuda-nvcc cuda-gdb
+    conda clean -afy
+
+    # Pass existing tool references to container
+    ln -sf /opt/conda/bin/nvcc /usr/local/bin/nvcc
+    ln -sf /opt/conda/bin/conda /usr/local/bin/conda
+    ln -sf /opt/conda/bin/cuda-gdb /usr/local/bin/cuda-gdb
