@@ -16,6 +16,7 @@ pykokkos-base/
 logs.*
 *.log
 *.prof
+kernel_profile.json
 
 # Out files 
 *.o
