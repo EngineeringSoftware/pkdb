@@ -5,56 +5,70 @@ class Acc(Generic[TypeVar("T")]):
     def __init__(self, val):
         self.val = val
 
+    # Non-augmented arithmetic (`n + 1`, `n * 2`, ...) must not mutate `n`,
+    # matching normal Python operator semantics.
     def __add__(self, other):
-        self.val = self.val + other
-        return self
+        return self.val + other
 
     def __radd__(self, other):
+        return other + self.val
+
+    def __sub__(self, other):
+        return self.val - other
+
+    def __rsub__(self, other):
+        return other - self.val
+
+    def __mul__(self, other):
+        return self.val * other
+
+    def __rmul__(self, other):
+        return other * self.val
+
+    def __truediv__(self, other):
+        return self.val / other
+
+    def __rtruediv__(self, other):
+        return other / self.val
+
+    def __floordiv__(self, other):
+        return self.val // other
+
+    def __rfloordiv__(self, other):
+        return other // self.val
+
+    def __mod__(self, other):
+        return self.val % other
+
+    def __rmod__(self, other):
+        return other % self.val
+
+    def __neg__(self):
+        return -self.val
+
+    # Augmented assignment (`n += 1`, ...) is where mutation belongs.
+    def __iadd__(self, other):
         self.val = self.val + other
         return self
 
-    def __sub__(self, other):
+    def __isub__(self, other):
         self.val = self.val - other
         return self
 
-    def __rsub__(self, other):
-        self.val = other - self.val
-        return self
-
-    def __mul__(self, other):
+    def __imul__(self, other):
         self.val = self.val * other
         return self
 
-    def __rmul__(self, other):
-        self.val = self.val * other
-        return self
-
-    def __truediv__(self, other):
+    def __itruediv__(self, other):
         self.val = self.val / other
         return self
 
-    def __rtruediv__(self, other):
-        self.val = other / self.val
-        return self
-
-    def __floordiv__(self, other):
+    def __ifloordiv__(self, other):
         self.val = self.val // other
         return self
 
-    def __rfloordiv__(self, other):
-        self.val = other // self.val
-        return self
-
-    def __mod__(self, other):
+    def __imod__(self, other):
         self.val = self.val % other
-        return self
-
-    def __rmov__(self, other):
-        self.val = other % self.val
-        return self
-
-    def __neg__(self):
-        self.val = -self.val
         return self
 
     def __index__(self):

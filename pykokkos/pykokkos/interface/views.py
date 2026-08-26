@@ -147,7 +147,7 @@ class ViewType:
         if self.shape == () and key == 0:
             return self.data
 
-        if isinstance(key, int) or isinstance(key, TeamMember):
+        if isinstance(key, int) or isinstance(key, TeamMember) or hasattr(key, "__index__"):
             if self.trait is Trait.Unmanaged:
                 return_val = self.xp_array[key]
             else:

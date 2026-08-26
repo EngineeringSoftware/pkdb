@@ -11,28 +11,32 @@ def atomic_fetch_add(
     view: View, indices: List[int], value: Union[int, float]
 ) -> Union[int, float]:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] += value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_and(view: View, indices: List[int], value: int) -> int:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] &= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_div(
     view: View, indices: List[int], value: Union[int, float]
 ) -> Union[int, float]:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] /= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_lshift(view: View, indices: List[int], value: int) -> int:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] <<= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_max(
@@ -55,42 +59,48 @@ def atomic_fetch_min(
 
 def atomic_fetch_mod(view: View, indices: List[int], value: int) -> int:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] %= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_mul(
     view: View, indices: List[int], value: Union[int, float]
 ) -> Union[int, float]:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] *= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_or(view: View, indices: List[int], value: int) -> int:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] |= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_rshift(view: View, indices: List[int], value: int) -> int:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] >>= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_sub(
     view: View, indices: List[int], value: Union[int, float]
 ) -> Union[int, float]:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] -= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_fetch_xor(view: View, indices: List[int], value: int) -> int:
     inner = reduce(operator.getitem, indices[:-1], view)
+    old_result = inner[indices[-1]]
     inner[indices[-1]] ^= value
-    return inner[indices[-1]]
+    return old_result
 
 
 def atomic_compare_exchange(

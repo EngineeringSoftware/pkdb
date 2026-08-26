@@ -145,7 +145,12 @@ class TeamPolicy(ExecutionPolicy):
         unpacked: Tuple = tuple(args)
 
         if len(unpacked) == 2:
-            space = km.get_execution_space_instance(km.get_default_space())
+            default_space = km.get_default_space()
+            space = (
+                default_space
+                if default_space is ExecutionSpace.Debug
+                else km.get_execution_space_instance(default_space)
+            )
             league_size = unpacked[0]
             team_size = unpacked[1]
             vector_length = -1
@@ -163,7 +168,12 @@ class TeamPolicy(ExecutionPolicy):
                 team_size = third
                 vector_length = -1
             else:
-                space = km.get_execution_space_instance(km.get_default_space())
+                default_space = km.get_default_space()
+                space = (
+                    default_space
+                    if default_space is ExecutionSpace.Debug
+                    else km.get_execution_space_instance(default_space)
+                )
                 league_size = first
                 team_size = second
                 vector_length = third
@@ -189,7 +199,8 @@ class TeamPolicy(ExecutionPolicy):
         if isinstance(space, ExecutionSpace):
             if space is ExecutionSpace.Default:
                 space = km.get_default_space()
-            space = ExecutionSpaceInstance(space)
+            if space is not ExecutionSpace.Debug:
+                space = ExecutionSpaceInstance(space)
 
         elif not isinstance(space, ExecutionSpaceInstance):
             raise TypeError(f"Invalid space argument {space}")

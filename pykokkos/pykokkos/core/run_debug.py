@@ -122,7 +122,7 @@ def run_workunit_debug(
 
     elif isinstance(policy, TeamThreadRange) or isinstance(policy, ThreadVectorRange):
         for i in range(policy.count):
-            call_workunit(operation, workunit, TeamMember(i, 0), acc, **kwargs)
+            call_workunit(operation, workunit, i, acc, **kwargs)
 
     else:
         if isinstance(policy, MDRangePolicy):

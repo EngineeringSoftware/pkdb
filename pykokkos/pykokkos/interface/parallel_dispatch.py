@@ -8,7 +8,7 @@ import pykokkos.kokkos_manager as km
 from pykokkos.core.cppast import BuiltinType
 
 from .execution_policy import ExecutionPolicy, RangePolicy
-from .execution_space import ExecutionSpace, DeviceExecutionSpace
+from .execution_space import ExecutionSpace, ExecutionSpaceInstance, DeviceExecutionSpace
 from .views import ViewType, array
 
 from .interface_util import generic_error, get_filename, get_lineno
@@ -195,6 +195,11 @@ def check_workunit(workunit: Any) -> None:
         raise TypeError(f"ERROR: {workunit} is not a valid workunit")
 
 
+def policy_execution_space(policy: ExecutionPolicy) -> ExecutionSpace:
+    space = policy.space
+    return space.space if isinstance(space, ExecutionSpaceInstance) else space
+
+
 def convert_arrays(kwargs: Dict[str, Any], workunit: Callable, execution_space) -> None:
     """
     Convert all numpy, cupy and pytorch ndarray objects into pk Views
@@ -303,7 +308,7 @@ def parallel_for(*args, **kwargs) -> None:
 
     kwargs = dict(kwargs)
     handled_args: HandledArgs = handle_args(True, args)
-    convert_arrays(kwargs, handled_args.workunit, handled_args.policy.space.space)
+    convert_arrays(kwargs, handled_args.workunit, policy_execution_space(handled_args.policy))
 
     runtime_singleton.runtime.run_workunit(
         handled_args.name, handled_args.policy, handled_args.workunit, "for", **kwargs
@@ -320,7 +325,7 @@ def reduce_body(operation: str, *args, **kwargs) -> Union[float, int]:
 
     kwargs = dict(kwargs)
     handled_args: HandledArgs = handle_args(True, args)
-    convert_arrays(kwargs, handled_args.workunit, handled_args.policy.space.space)
+    convert_arrays(kwargs, handled_args.workunit, policy_execution_space(handled_args.policy))
 
     args_to_hash: List = []
     args_not_to_hash: Dict = {}

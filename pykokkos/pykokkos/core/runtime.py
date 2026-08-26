@@ -418,6 +418,9 @@ class Runtime:
         :returns: True or False
         """
 
+        if km.get_default_space() is ExecutionSpace.Debug:
+            return True
+
         return space is ExecutionSpace.Debug or (
             space is ExecutionSpace.Default
             and km.get_default_space() is ExecutionSpace.Debug
