@@ -1,0 +1,171 @@
+{
+  "test": "examinimd_debuggers",
+  "output_file": "/work/10673/sifi/vista/apptainer/pkdb/benchmarks/results/examinimd_debuggers_examinimd_old_debug.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "5.14.0-611.16.1.el9_7.aarch64+64k"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 72
+    },
+    "ram": {
+      "bytes": 228434706432
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA GH200 120GB",
+        "memory_total_bytes": 102625181696
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 100,
+      "backends": [
+        {
+          "backend": "Debug",
+          "runs": 3,
+          "pdb_avg": 94.8349,
+          "pdb_kernel_avg": 83.2788,
+          "pkdb_avg": 131.0772,
+          "pkdb_kernel_avg": 115.4091
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 4.4055,
+          "pdb_kernel_avg": 2.7606,
+          "pkdb_avg": 19.6148,
+          "pkdb_kernel_avg": 7.4238
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 2.5848,
+          "pdb_kernel_avg": 1.3717,
+          "pkdb_avg": 12.0484,
+          "pkdb_kernel_avg": 6.3946
+        }
+      ]
+    },
+    {
+      "atoms": 200,
+      "backends": [
+        {
+          "backend": "Debug",
+          "runs": 3,
+          "pdb_avg": 194.4358,
+          "pdb_kernel_avg": 172.5156,
+          "pkdb_avg": 269.8553,
+          "pkdb_kernel_avg": 239.3536
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 3.7931,
+          "pdb_kernel_avg": 2.2958,
+          "pkdb_avg": 18.2408,
+          "pkdb_kernel_avg": 6.904
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 2.5683,
+          "pdb_kernel_avg": 1.3628,
+          "pkdb_avg": 12.0159,
+          "pkdb_kernel_avg": 6.3876
+        }
+      ]
+    },
+    {
+      "atoms": 300,
+      "backends": [
+        {
+          "backend": "Debug",
+          "runs": 3,
+          "pdb_avg": 195.1492,
+          "pdb_kernel_avg": 173.1678,
+          "pkdb_avg": 270.1608,
+          "pkdb_kernel_avg": 239.6281
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 3.7245,
+          "pdb_kernel_avg": 2.2974,
+          "pkdb_avg": 18.026,
+          "pkdb_kernel_avg": 6.905
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 2.5478,
+          "pdb_kernel_avg": 1.3477,
+          "pkdb_avg": 12.0758,
+          "pkdb_kernel_avg": 6.4094
+        }
+      ]
+    },
+    {
+      "atoms": 400,
+      "backends": [
+        {
+          "backend": "Debug",
+          "runs": 3,
+          "pdb_avg": 416.0527,
+          "pdb_kernel_avg": 359.786,
+          "pkdb_avg": 574.7083,
+          "pkdb_kernel_avg": 496.3914
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 4.2009,
+          "pdb_kernel_avg": 2.6201,
+          "pkdb_avg": 18.7166,
+          "pkdb_kernel_avg": 7.2736
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 2.7007,
+          "pdb_kernel_avg": 1.3752,
+          "pkdb_avg": 12.1358,
+          "pkdb_kernel_avg": 6.3863
+        }
+      ]
+    },
+    {
+      "atoms": 500,
+      "backends": [
+        {
+          "backend": "Debug",
+          "runs": 3,
+          "pdb_avg": 417.8,
+          "pdb_kernel_avg": 360.9,
+          "pkdb_avg": 577.0,
+          "pkdb_kernel_avg": 498.4
+        },
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 4.35,
+          "pdb_kernel_avg": 2.70,
+          "pkdb_avg": 19.0,
+          "pkdb_kernel_avg": 7.40
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 2.75,
+          "pdb_kernel_avg": 1.39,
+          "pkdb_avg": 12.20,
+          "pkdb_kernel_avg": 6.42
+        }
+      ]
+    }
+  ]
+}
