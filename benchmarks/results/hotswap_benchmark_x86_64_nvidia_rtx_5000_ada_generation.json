@@ -1,54 +1,27 @@
 {
   "_scenario_legend": {
-    "scenario_A_edit_rerun": "Scenario A: edit + rerun - change the Python source on disk and run two separate pkdb sessions (full workunit, then alternate workunit).",
+    "scenario_A_edit_rerun": "Scenario A: edit + rerun - change the Python source on disk and run two separate plain `pdb` sessions (full workunit, then alternate workunit). No native device attach; this is the traditional workflow hotswap is meant to beat.",
     "scenario_B_hotswap": "Scenario B: pkdb hotswap - one pkdb session; swap the workunit with the pkdb `hotswap` command without restarting the process."
+  },
+  "_metric_legend": {
+    "tA1": "Scenario A, run 1: process start to the probe breakpoint (original kernel).",
+    "tA2": "Scenario A, run 2: process start to the probe breakpoint (source edited to the alternate kernel).",
+    "tA": "Scenario A total: tA1 + tA2.",
+    "tB": "Scenario B: process start to the probe breakpoint, one session using `hotswap`.",
+    "ths": "Substitution latency: the `hotswap` command itself, from the pre-call breakpoint to its confirmation."
   },
   "system": {
     "os": {
       "platform": "linux",
       "distro": "Ubuntu 22.04.5 LTS",
-      "kernel": "6.17.0-19-generic"
+      "kernel": "7.0.0-28-generic"
     },
     "processor": {
       "name": "0",
-      "logical_cores": 32,
-      "hz_by_logical_core": [
-        3222682000,
-        1420768000,
-        3199967000,
-        1450803000,
-        795417000,
-        800000000,
-        786421000,
-        800000000,
-        800000000,
-        800000000,
-        800000000,
-        800000000,
-        877395000,
-        842898000,
-        800000000,
-        768460000,
-        800000000,
-        1052959000,
-        800000000,
-        800000000,
-        800000000,
-        800000000,
-        800000000,
-        1198417000,
-        800000000,
-        800000000,
-        799426000,
-        800000000,
-        800000000,
-        800000000,
-        800000000,
-        800000000
-      ]
+      "logical_cores": 32
     },
     "ram": {
-      "bytes": 134001274880
+      "bytes": 133997826048
     },
     "gpus": [
       {
@@ -71,59 +44,61 @@
   "presets": {
     "temperature": {
       "headline": {
-        "without_hotswap_sum_two_runs_s": 3.4197992910631,
-        "with_hotswap_total_r_to_factor_s": 1.8474146649241447,
-        "hotswap_command_s": 0.054103881819173694
+        "tA1": 43.76399163203314,
+        "tA2": 43.341615186072886,
+        "tA": 87.10560681810603,
+        "tB": 66.54781738785096,
+        "ths": 0.008634238969534636
       },
       "run": {
         "hotswap": true,
         "edit_rerun": true
       },
       "breakpoints": {
-        "property_file": "/home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/property_temperature.py",
+        "property_file": "/home/sifi/pkdb/benchmarks/ExaMiniMD/src/property_temperature.py",
         "class_name": "Temperature",
         "method_name": "compute",
-        "line_pre": 42,
-        "line_inspect": 55,
-        "hotswap_line": 44,
+        "line_pre": 40,
+        "line_inspect": 53,
+        "hotswap_line": 42,
         "pdb_probe": "T",
         "probe_label": "T",
         "min_lines_before_parallel": 2
       },
       "preset": "temperature",
       "scenario_B_hotswap": {
-        "to_print_s": 1.6796357119455934,
-        "hotswap_cmd_s": 0.054103881819173694,
-        "print_to_factor_s": 0.1677789529785514,
-        "total_r_to_factor_s": 1.8474146649241447,
-        "hotswap_cli": "hotswap compute_workunit compute_workunit_half /home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/property_temperature.py:44",
+        "tB": 66.54781738785096,
+        "ths": 0.008634238969534636,
+        "hotswap_cli": "hotswap compute_workunit compute_workunit_half /home/sifi/pkdb/benchmarks/ExaMiniMD/src/property_temperature.py:42",
         "pdb_probe": "T",
-        "T_hotswap": 105.80263943943731
+        "T_hotswap": 32135.03749022947
       },
       "scenario_A_edit_rerun": {
-        "run1_to_factor_s": 1.7250040129292756,
-        "run2_to_factor_s": 1.6947952781338245,
-        "sum_two_runs_s": 3.4197992910631,
-        "T_run1_full_kernel": 211.60527887887463,
-        "T_run2_half_kernel": 105.80263943943731
+        "tA1": 43.76399163203314,
+        "tA2": 43.341615186072886,
+        "tA": 87.10560681810603,
+        "T_run1_full_kernel": 103776.99986675534,
+        "T_run2_half_kernel": 32135.03749022947
       },
       "verify_ok": true
     },
     "kine": {
       "headline": {
-        "without_hotswap_sum_two_runs_s": 7.143308090046048,
-        "with_hotswap_total_r_to_factor_s": 3.7255288988817483,
-        "hotswap_command_s": 0.05366856884211302
+        "tA1": 44.406819861149415,
+        "tA2": 43.84201129106805,
+        "tA": 88.24883115221746,
+        "tB": 67.18175784801133,
+        "ths": 0.0006480459123849869
       },
       "run": {
         "hotswap": true,
         "edit_rerun": true
       },
       "breakpoints": {
-        "property_file": "/home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/property_kine.py",
+        "property_file": "/home/sifi/pkdb/benchmarks/ExaMiniMD/src/property_kine.py",
         "class_name": "KinE",
         "method_name": "compute",
-        "line_pre": 39,
+        "line_pre": 37,
         "line_inspect": 46,
         "hotswap_line": 41,
         "pdb_probe": "KE",
@@ -132,39 +107,39 @@
       },
       "preset": "kine",
       "scenario_B_hotswap": {
-        "to_print_s": 3.558235469972715,
-        "hotswap_cmd_s": 0.05366856884211302,
-        "print_to_factor_s": 0.16729342890903354,
-        "total_r_to_factor_s": 3.7255288988817483,
-        "hotswap_cli": "hotswap work work_half /home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/property_kine.py:41",
+        "tB": 67.18175784801133,
+        "ths": 0.0006480459123849869,
+        "hotswap_cli": "hotswap work work_half /home/sifi/pkdb/benchmarks/ExaMiniMD/src/property_kine.py:41",
         "pdb_probe": "KE",
-        "KE_hotswap": 1812.2999999999995
+        "KE_hotswap": 540910.1906056292
       },
       "scenario_A_edit_rerun": {
-        "run1_to_factor_s": 3.5387577549554408,
-        "run2_to_factor_s": 3.6045503350906074,
-        "sum_two_runs_s": 7.143308090046048,
-        "KE_run1_full_kernel": 3624.599999999999,
-        "KE_run2_half_kernel": 1812.2999999999995
+        "tA1": 44.406819861149415,
+        "tA2": 43.84201129106805,
+        "tA": 88.24883115221746,
+        "KE_run1_full_kernel": 1744222.1999999995,
+        "KE_run2_half_kernel": 540844.0387308775
       },
       "verify_ok": true
     },
     "nve-initial": {
       "headline": {
-        "without_hotswap_sum_two_runs_s": 7.257725596195087,
-        "with_hotswap_total_r_to_factor_s": 3.7200595838949084,
-        "hotswap_command_s": 0.054688006173819304
+        "tA1": 44.895364990923554,
+        "tA2": 44.74940085504204,
+        "tA": 89.6447658459656,
+        "tB": 67.77896174089983,
+        "ths": 0.006209719926118851
       },
       "run": {
         "hotswap": true,
         "edit_rerun": true
       },
       "breakpoints": {
-        "property_file": "/home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/integrator_nve.py",
+        "property_file": "/home/sifi/pkdb/benchmarks/ExaMiniMD/src/integrator_nve.py",
         "class_name": "IntegratorNVE",
         "method_name": "initial_integrate",
-        "line_pre": 92,
-        "line_inspect": 109,
+        "line_pre": 90,
+        "line_inspect": 108,
         "hotswap_line": 94,
         "pdb_probe": "self.system.v[0][0]",
         "probe_label": "v00",
@@ -172,39 +147,39 @@
       },
       "preset": "nve-initial",
       "scenario_B_hotswap": {
-        "to_print_s": 3.547013975912705,
-        "hotswap_cmd_s": 0.054688006173819304,
-        "print_to_factor_s": 0.17304560798220336,
-        "total_r_to_factor_s": 3.7200595838949084,
-        "hotswap_cli": "hotswap initial_integrate initial_integrate_half /home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/integrator_nve.py:94",
+        "tB": 67.77896174089983,
+        "ths": 0.006209719926118851,
+        "hotswap_cli": "hotswap initial_integrate initial_integrate_half /home/sifi/pkdb/benchmarks/ExaMiniMD/src/integrator_nve.py:94",
         "pdb_probe": "self.system.v[0][0]",
         "v00_hotswap": 0.0
       },
       "scenario_A_edit_rerun": {
-        "run1_to_factor_s": 3.631371664116159,
-        "run2_to_factor_s": 3.6263539320789278,
-        "sum_two_runs_s": 7.257725596195087,
-        "v00_run1_full_kernel": -0.02097545775459613,
+        "tA1": 44.895364990923554,
+        "tA2": 44.74940085504204,
+        "tA": 89.6447658459656,
+        "v00_run1_full_kernel": -0.009809387012444541,
         "v00_run2_half_kernel": 0.0
       },
       "verify_ok": true
     },
     "nve-final": {
       "headline": {
-        "without_hotswap_sum_two_runs_s": 7.595729012042284,
-        "with_hotswap_total_r_to_factor_s": 4.081154998159036,
-        "hotswap_command_s": 0.05412110686302185
+        "tA1": 44.22216332401149,
+        "tA2": 44.85715496819466,
+        "tA": 89.07931829220615,
+        "tB": 67.77420543809421,
+        "ths": 0.006272657075896859
       },
       "run": {
         "hotswap": true,
         "edit_rerun": true
       },
       "breakpoints": {
-        "property_file": "/home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/integrator_nve.py",
+        "property_file": "/home/sifi/pkdb/benchmarks/ExaMiniMD/src/integrator_nve.py",
         "class_name": "IntegratorNVE",
         "method_name": "final_integrate",
-        "line_pre": 113,
-        "line_inspect": 128,
+        "line_pre": 110,
+        "line_inspect": 127,
         "hotswap_line": 115,
         "pdb_probe": "self.system.v[0][0]",
         "probe_label": "v00",
@@ -212,19 +187,17 @@
       },
       "preset": "nve-final",
       "scenario_B_hotswap": {
-        "to_print_s": 3.7900304831564426,
-        "hotswap_cmd_s": 0.05412110686302185,
-        "print_to_factor_s": 0.2911245150025934,
-        "total_r_to_factor_s": 4.081154998159036,
-        "hotswap_cli": "hotswap final_integrate final_integrate_half /home/sifi/pkdb/eval/benchmarks/ExaMiniMD/src/integrator_nve.py:115",
+        "tB": 67.77420543809421,
+        "ths": 0.006272657075896859,
+        "hotswap_cli": "hotswap final_integrate final_integrate_half /home/sifi/pkdb/benchmarks/ExaMiniMD/src/integrator_nve.py:115",
         "pdb_probe": "self.system.v[0][0]",
         "v00_hotswap": 0.0
       },
       "scenario_A_edit_rerun": {
-        "run1_to_factor_s": 3.8242236580699682,
-        "run2_to_factor_s": 3.771505353972316,
-        "sum_two_runs_s": 7.595729012042284,
-        "v00_run1_full_kernel": -0.020928537948185822,
+        "tA1": 44.22216332401149,
+        "tA2": 44.85715496819466,
+        "tA": 89.07931829220615,
+        "v00_run1_full_kernel": -0.00978406119364633,
         "v00_run2_half_kernel": 0.0
       },
       "verify_ok": true
