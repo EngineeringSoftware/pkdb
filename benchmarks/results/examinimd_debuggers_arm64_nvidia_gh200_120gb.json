@@ -336,6 +336,48 @@
           "pkdb_kernel_avg": 64.7987
         }
       ]
+    },
+    {
+      "atoms": 7000000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 801.6719,
+          "pdb_kernel_avg": 109.8262,
+          "pkdb_avg": 1012.7238,
+          "pkdb_kernel_avg": 115.6962
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 758.8373,
+          "pdb_kernel_avg": 81.5858,
+          "pkdb_avg": 960.9018,
+          "pkdb_kernel_avg": 87.448
+        }
+      ]
+    },
+    {
+      "atoms": 10000000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 3,
+          "pdb_avg": 1155.5863,
+          "pdb_kernel_avg": 153.1803,
+          "pkdb_avg": 1444.3746,
+          "pkdb_kernel_avg": 159.705
+        },
+        {
+          "backend": "DebugOpenMP",
+          "runs": 3,
+          "pdb_avg": 1100.6053,
+          "pdb_kernel_avg": 114.1886,
+          "pkdb_avg": 1381.0305,
+          "pkdb_kernel_avg": 118.6666
+        }
+      ]
     }
   ]
 }

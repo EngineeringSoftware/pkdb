@@ -231,6 +231,32 @@
           "pkdb_kernel_avg": 33.4148
         }
       ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 232.1351,
+          "pdb_kernel_avg": 27.5049,
+          "pkdb_avg": 312.8967,
+          "pkdb_kernel_avg": 33.4148
+        }
+      ]
+    },
+    {
+      "atoms": 5000000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 581.7993,
+          "pdb_kernel_avg": 67.5837,
+          "pkdb_avg": 787.257,
+          "pkdb_kernel_avg": 73.4728
+        }
+      ]
     }
   ]
 }
