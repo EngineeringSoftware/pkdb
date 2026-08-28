@@ -1,0 +1,236 @@
+{
+  "test": "examinimd_debuggers",
+  "output_file": "/home1/sifi/pkdb/benchmarks/results/examinimd_debuggers_x86_64_amd_radeon_graphics.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Rocky Linux 9.1 (Blue Onyx)",
+      "kernel": "5.14.0-611.54.1.el9_7.x86_64"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 192
+    },
+    "ram": {
+      "bytes": 2434151432192
+    },
+    "gpus": [
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      },
+      {
+        "model": "AMD Radeon Graphics",
+        "memory_total_bytes": 206141652992
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 4.6151,
+          "pdb_kernel_avg": 2.1999,
+          "pkdb_avg": 10.6997,
+          "pkdb_kernel_avg": 7.8882
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 7.6102,
+          "pdb_kernel_avg": 2.4214,
+          "pkdb_avg": 14.8107,
+          "pkdb_kernel_avg": 8.0865
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 16.1492,
+          "pdb_kernel_avg": 3.2579,
+          "pkdb_avg": 26.3375,
+          "pkdb_kernel_avg": 8.8616
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 33.2213,
+          "pdb_kernel_avg": 5.2262,
+          "pkdb_avg": 49.377,
+          "pkdb_kernel_avg": 10.9914
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 37.8217,
+          "pdb_kernel_avg": 5.8466,
+          "pkdb_avg": 55.5583,
+          "pkdb_kernel_avg": 11.3976
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 40.1437,
+          "pdb_kernel_avg": 6.179,
+          "pkdb_avg": 60.0045,
+          "pkdb_kernel_avg": 11.9429
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 46.8248,
+          "pdb_kernel_avg": 7.6441,
+          "pkdb_avg": 72.2306,
+          "pkdb_kernel_avg": 13.24
+        }
+      ]
+    },
+    {
+      "atoms": 400000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 48.2408,
+          "pdb_kernel_avg": 7.125,
+          "pkdb_avg": 70.2554,
+          "pkdb_kernel_avg": 12.7612
+        }
+      ]
+    },
+    {
+      "atoms": 420000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 50.7727,
+          "pdb_kernel_avg": 7.4146,
+          "pkdb_avg": 74.0087,
+          "pkdb_kernel_avg": 13.0694
+        }
+      ]
+    },
+    {
+      "atoms": 450000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 54.2361,
+          "pdb_kernel_avg": 7.7324,
+          "pkdb_avg": 77.1451,
+          "pkdb_kernel_avg": 13.3253
+        }
+      ]
+    },
+    {
+      "atoms": 470000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 57.6071,
+          "pdb_kernel_avg": 8.2019,
+          "pkdb_avg": 82.5272,
+          "pkdb_kernel_avg": 13.8639
+        }
+      ]
+    },
+    {
+      "atoms": 500000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 60.9091,
+          "pdb_kernel_avg": 8.4802,
+          "pkdb_avg": 87.5607,
+          "pkdb_kernel_avg": 14.2866
+        }
+      ]
+    },
+    {
+      "atoms": 1000000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 116.4342,
+          "pdb_kernel_avg": 14.9124,
+          "pkdb_avg": 165.5425,
+          "pkdb_kernel_avg": 21.0544
+        }
+      ]
+    },
+    {
+      "atoms": 2000000,
+      "backends": [
+        {
+          "backend": "DebugHIP",
+          "runs": 3,
+          "pdb_avg": 232.1351,
+          "pdb_kernel_avg": 27.5049,
+          "pkdb_avg": 312.8967,
+          "pkdb_kernel_avg": 33.4148
+        }
+      ]
+    }
+  ]
+}
