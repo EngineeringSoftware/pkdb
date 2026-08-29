@@ -28,6 +28,9 @@ from pkdb.core import phase_timing as pt  # noqa: E402
 DEFAULT_SPACES = ["DebugCuda"]
 DEFAULT_ATOM_SIZES = [
     4_000,
+    5_000,
+    20_000,
+    10_000,
     32_000,
     108_000,
     256_000,
