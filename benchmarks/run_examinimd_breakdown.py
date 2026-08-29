@@ -43,8 +43,8 @@ TIMEOUT = 600  # seconds per run
 BENCHMARKS_DIR = Path(__file__).resolve().parent
 PREFIX = "examinimd_breakdown"
 
-# "  <label>  <seconds>s  (n=<count>  <pct>%)" - the App execution line omits "n=", and
-# Total wall clock omits the trailing "(...)" entirely.
+# "  <label>  <seconds>s  (n=<count>  <pct>%)" - Total wall clock omits the trailing
+# "(...)" entirely. The "n=" group is optional in the regex to tolerate that.
 _PHASE_RE = re.compile(
     r"^\s*(?P<label>.+?)\s+(?P<seconds>\d+\.\d+)s(?:\s+\(\s*(?:n=(?P<count>\d+)\s+)?(?P<pct>[\d.]+)%\))?\s*$"
 )
