@@ -1,0 +1,966 @@
+{
+  "test": "examinimd_breakdown",
+  "output_file": "/home/sifi/pkdb/benchmarks/results/examinimd_breakdown_x86_64_nvidia_rtx_5000_ada_generation.json",
+  "system": {
+    "os": {
+      "platform": "linux",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "kernel": "7.0.0-28-generic"
+    },
+    "processor": {
+      "name": "0",
+      "logical_cores": 32
+    },
+    "ram": {
+      "bytes": 133997826048
+    },
+    "gpus": [
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      },
+      {
+        "model": "NVIDIA RTX 5000 Ada Generation",
+        "memory_total_bytes": 34351349760
+      }
+    ]
+  },
+  "sizes": [
+    {
+      "atoms": 1000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.6032,
+              "count": 1,
+              "pct": 1.5
+            },
+            "bdb_line_tracing": {
+              "seconds": 27.7135,
+              "count": 390549,
+              "pct": 67.6,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6069,
+                  "count": 6755,
+                  "pct": 1.5
+                },
+                "execute_hook": {
+                  "seconds": 25.0531,
+                  "count": 3860,
+                  "pct": 61.1,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 21.6387,
+                      "count": 3,
+                      "pct": 52.8
+                    },
+                    "handoff_update": {
+                      "seconds": 1.3815,
+                      "count": 9,
+                      "pct": 3.4
+                    },
+                    "handoff_detach": {
+                      "seconds": 0.4316,
+                      "count": 2,
+                      "pct": 1.1
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.7463,
+              "count": 965,
+              "pct": 4.3
+            },
+            "kernel_exec": {
+              "seconds": 3.9944,
+              "count": 977,
+              "pct": 9.7
+            },
+            "app_execution": {
+              "seconds": 6.9618,
+              "pct": 17.0
+            },
+            "total_wall_clock": {
+              "seconds": 41.0192
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 2000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5513,
+              "count": 1,
+              "pct": 1.3
+            },
+            "bdb_line_tracing": {
+              "seconds": 28.2609,
+              "count": 389933,
+              "pct": 67.7,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6203,
+                  "count": 6748,
+                  "pct": 1.5
+                },
+                "execute_hook": {
+                  "seconds": 25.5235,
+                  "count": 3856,
+                  "pct": 61.1,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 21.4777,
+                      "count": 3,
+                      "pct": 51.4
+                    },
+                    "handoff_update": {
+                      "seconds": 1.4189,
+                      "count": 9,
+                      "pct": 3.4
+                    },
+                    "handoff_detach": {
+                      "seconds": 0.9784,
+                      "count": 2,
+                      "pct": 2.3
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8029,
+              "count": 964,
+              "pct": 4.3
+            },
+            "kernel_exec": {
+              "seconds": 4.0173,
+              "count": 976,
+              "pct": 9.6
+            },
+            "app_execution": {
+              "seconds": 7.1283,
+              "pct": 17.1
+            },
+            "total_wall_clock": {
+              "seconds": 41.7607
+            }
+          },
+          "line_trace_events": {
+            "pykokkos": 389933,
+            "other": 7
+          },
+          "examinimd_performance": {
+            "procs": 1,
+            "particles": 2048,
+            "time_s": 10.658758,
+            "t_force_s": 1.22525,
+            "t_neigh_s": 0.19038,
+            "t_comm_s": 6.477102,
+            "t_other_s": 2.764482,
+            "steps_per_s": 9.381956,
+            "atomsteps_per_s": 19214.25
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 3000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5518,
+              "count": 1,
+              "pct": 1.3
+            },
+            "bdb_line_tracing": {
+              "seconds": 28.1167,
+              "count": 389933,
+              "pct": 67.0,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6405,
+                  "count": 6748,
+                  "pct": 1.5
+                },
+                "execute_hook": {
+                  "seconds": 25.2984,
+                  "count": 3856,
+                  "pct": 60.3,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 21.3687,
+                      "count": 3,
+                      "pct": 50.9
+                    },
+                    "handoff_update": {
+                      "seconds": 1.3535,
+                      "count": 9,
+                      "pct": 3.2
+                    },
+                    "handoff_detach": {
+                      "seconds": 0.8736,
+                      "count": 2,
+                      "pct": 2.1
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8663,
+              "count": 964,
+              "pct": 4.4
+            },
+            "kernel_exec": {
+              "seconds": 4.1322,
+              "count": 976,
+              "pct": 9.8
+            },
+            "app_execution": {
+              "seconds": 7.3028,
+              "pct": 17.4
+            },
+            "total_wall_clock": {
+              "seconds": 41.9698
+            }
+          },
+          "line_trace_events": {
+            "pykokkos": 389933,
+            "other": 7
+          },
+          "examinimd_performance": {
+            "procs": 1,
+            "particles": 2916,
+            "time_s": 11.026422,
+            "t_force_s": 1.308212,
+            "t_neigh_s": 0.175753,
+            "t_comm_s": 6.713169,
+            "t_other_s": 2.827676,
+            "steps_per_s": 9.069125,
+            "atomsteps_per_s": 26445.57
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 4000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5735,
+              "count": 1,
+              "pct": 1.2
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.6,
+              "count": 389933,
+              "pct": 70.1,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6197,
+                  "count": 6748,
+                  "pct": 1.3
+                },
+                "execute_hook": {
+                  "seconds": 29.8473,
+                  "count": 3856,
+                  "pct": 64.2,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.4886,
+                      "count": 3,
+                      "pct": 54.8
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6237,
+                      "count": 9,
+                      "pct": 3.5
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.0876,
+                      "count": 2,
+                      "pct": 2.3
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.7972,
+              "count": 964,
+              "pct": 3.9
+            },
+            "pykokkos_execution": {
+              "seconds": 5.2448,
+              "count": 964,
+              "pct": 11.3
+            },
+            "kernel_exec": {
+              "seconds": 4.486,
+              "count": 976,
+              "pct": 9.7
+            },
+            "app_execution": {
+              "seconds": 1.7814,
+              "pct": 3.8
+            },
+            "total_wall_clock": {
+              "seconds": 46.4829
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 5000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5598,
+              "count": 1,
+              "pct": 1.4
+            },
+            "bdb_line_tracing": {
+              "seconds": 28.0986,
+              "count": 389317,
+              "pct": 68.2,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6312,
+                  "count": 6741,
+                  "pct": 1.5
+                },
+                "execute_hook": {
+                  "seconds": 25.2859,
+                  "count": 3852,
+                  "pct": 61.4,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 21.3627,
+                      "count": 3,
+                      "pct": 51.8
+                    },
+                    "handoff_update": {
+                      "seconds": 1.3553,
+                      "count": 9,
+                      "pct": 3.3
+                    },
+                    "handoff_detach": {
+                      "seconds": 0.8789,
+                      "count": 2,
+                      "pct": 2.1
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8467,
+              "count": 963,
+              "pct": 4.5
+            },
+            "kernel_exec": {
+              "seconds": 4.1875,
+              "count": 975,
+              "pct": 10.2
+            },
+            "app_execution": {
+              "seconds": 6.5084,
+              "pct": 15.8
+            },
+            "total_wall_clock": {
+              "seconds": 41.201
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 10000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5746,
+              "count": 1,
+              "pct": 1.3
+            },
+            "bdb_line_tracing": {
+              "seconds": 27.7016,
+              "count": 389317,
+              "pct": 64.7,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6212,
+                  "count": 6741,
+                  "pct": 1.5
+                },
+                "execute_hook": {
+                  "seconds": 24.9637,
+                  "count": 3852,
+                  "pct": 58.3,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 21.0589,
+                      "count": 3,
+                      "pct": 49.2
+                    },
+                    "handoff_update": {
+                      "seconds": 1.3635,
+                      "count": 9,
+                      "pct": 3.2
+                    },
+                    "handoff_detach": {
+                      "seconds": 0.8905,
+                      "count": 2,
+                      "pct": 2.1
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8157,
+              "count": 963,
+              "pct": 4.2
+            },
+            "kernel_exec": {
+              "seconds": 4.2448,
+              "count": 975,
+              "pct": 9.9
+            },
+            "app_execution": {
+              "seconds": 8.5038,
+              "pct": 19.8
+            },
+            "total_wall_clock": {
+              "seconds": 42.8405
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 20000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5589,
+              "count": 1,
+              "pct": 1.3
+            },
+            "bdb_line_tracing": {
+              "seconds": 27.8023,
+              "count": 389317,
+              "pct": 62.8,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.621,
+                  "count": 6741,
+                  "pct": 1.4
+                },
+                "execute_hook": {
+                  "seconds": 25.0273,
+                  "count": 3852,
+                  "pct": 56.5,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 21.0639,
+                      "count": 3,
+                      "pct": 47.6
+                    },
+                    "handoff_update": {
+                      "seconds": 1.4108,
+                      "count": 9,
+                      "pct": 3.2
+                    },
+                    "handoff_detach": {
+                      "seconds": 0.8994,
+                      "count": 2,
+                      "pct": 2.0
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8045,
+              "count": 963,
+              "pct": 4.1
+            },
+            "kernel_exec": {
+              "seconds": 4.7627,
+              "count": 975,
+              "pct": 10.8
+            },
+            "app_execution": {
+              "seconds": 9.3407,
+              "pct": 21.1
+            },
+            "total_wall_clock": {
+              "seconds": 44.2692
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 32000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5438,
+              "count": 1,
+              "pct": 1.1
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.5788,
+              "count": 389317,
+              "pct": 63.3,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6356,
+                  "count": 6741,
+                  "pct": 1.2
+                },
+                "execute_hook": {
+                  "seconds": 29.7267,
+                  "count": 3852,
+                  "pct": 57.8,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.3251,
+                      "count": 3,
+                      "pct": 49.2
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6122,
+                      "count": 9,
+                      "pct": 3.1
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.0882,
+                      "count": 2,
+                      "pct": 2.1
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8568,
+              "count": 963,
+              "pct": 3.6
+            },
+            "pykokkos_execution": {
+              "seconds": 5.5471,
+              "count": 963,
+              "pct": 10.8
+            },
+            "kernel_exec": {
+              "seconds": 5.2795,
+              "count": 975,
+              "pct": 10.3
+            },
+            "app_execution": {
+              "seconds": 5.622,
+              "pct": 10.9
+            },
+            "total_wall_clock": {
+              "seconds": 51.428
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 108000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5696,
+              "count": 1,
+              "pct": 0.9
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.7686,
+              "count": 389317,
+              "pct": 50.1,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6382,
+                  "count": 6741,
+                  "pct": 1.0
+                },
+                "execute_hook": {
+                  "seconds": 29.9031,
+                  "count": 3852,
+                  "pct": 45.7,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.4392,
+                      "count": 3,
+                      "pct": 38.9
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6354,
+                      "count": 9,
+                      "pct": 2.5
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.1253,
+                      "count": 2,
+                      "pct": 1.7
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8645,
+              "count": 963,
+              "pct": 2.8
+            },
+            "pykokkos_execution": {
+              "seconds": 5.4991,
+              "count": 963,
+              "pct": 8.4
+            },
+            "kernel_exec": {
+              "seconds": 7.2898,
+              "count": 975,
+              "pct": 11.1
+            },
+            "app_execution": {
+              "seconds": 17.4725,
+              "pct": 26.7
+            },
+            "total_wall_clock": {
+              "seconds": 65.4642
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 256000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5597,
+              "count": 1,
+              "pct": 0.6
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.3916,
+              "count": 388701,
+              "pct": 36.5,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6444,
+                  "count": 6734,
+                  "pct": 0.7
+                },
+                "execute_hook": {
+                  "seconds": 29.5979,
+                  "count": 3848,
+                  "pct": 33.4,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.1286,
+                      "count": 3,
+                      "pct": 28.3
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6678,
+                      "count": 9,
+                      "pct": 1.9
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.1164,
+                      "count": 2,
+                      "pct": 1.3
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8285,
+              "count": 962,
+              "pct": 2.1
+            },
+            "pykokkos_execution": {
+              "seconds": 5.588,
+              "count": 962,
+              "pct": 6.3
+            },
+            "kernel_exec": {
+              "seconds": 10.1839,
+              "count": 974,
+              "pct": 11.5
+            },
+            "app_execution": {
+              "seconds": 38.1765,
+              "pct": 43.0
+            },
+            "total_wall_clock": {
+              "seconds": 88.7282
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 300000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.58,
+              "count": 1,
+              "pct": 0.6
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.5351,
+              "count": 388701,
+              "pct": 34.4,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.63,
+                  "count": 6734,
+                  "pct": 0.7
+                },
+                "execute_hook": {
+                  "seconds": 29.7597,
+                  "count": 3848,
+                  "pct": 31.5,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.3152,
+                      "count": 3,
+                      "pct": 26.8
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6809,
+                      "count": 9,
+                      "pct": 1.8
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.0939,
+                      "count": 2,
+                      "pct": 1.2
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8246,
+              "count": 962,
+              "pct": 1.9
+            },
+            "pykokkos_execution": {
+              "seconds": 5.5466,
+              "count": 962,
+              "pct": 5.9
+            },
+            "kernel_exec": {
+              "seconds": 11.093,
+              "count": 974,
+              "pct": 11.7
+            },
+            "app_execution": {
+              "seconds": 42.9916,
+              "pct": 45.5
+            },
+            "total_wall_clock": {
+              "seconds": 94.5711
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 320000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5468,
+              "count": 1,
+              "pct": 0.6
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.5255,
+              "count": 388701,
+              "pct": 33.7,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6377,
+                  "count": 6734,
+                  "pct": 0.7
+                },
+                "execute_hook": {
+                  "seconds": 29.7109,
+                  "count": 3848,
+                  "pct": 30.8,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.2679,
+                      "count": 3,
+                      "pct": 26.2
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6385,
+                      "count": 9,
+                      "pct": 1.7
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.1148,
+                      "count": 2,
+                      "pct": 1.2
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8486,
+              "count": 962,
+              "pct": 1.9
+            },
+            "pykokkos_execution": {
+              "seconds": 5.5685,
+              "count": 962,
+              "pct": 5.8
+            },
+            "kernel_exec": {
+              "seconds": 11.622,
+              "count": 974,
+              "pct": 12.0
+            },
+            "app_execution": {
+              "seconds": 44.422,
+              "pct": 46.0
+            },
+            "total_wall_clock": {
+              "seconds": 96.5334
+            }
+          }
+        }
+      ]
+    },
+    {
+      "atoms": 370000,
+      "backends": [
+        {
+          "backend": "DebugCuda",
+          "runs": 1,
+          "phases": {
+            "startup": {
+              "seconds": 0.5818,
+              "count": 1,
+              "pct": 0.5
+            },
+            "bdb_line_tracing": {
+              "seconds": 32.4897,
+              "count": 388701,
+              "pct": 30.6,
+              "detail": {
+                "metadata_hook": {
+                  "seconds": 0.6441,
+                  "count": 6734,
+                  "pct": 0.6
+                },
+                "execute_hook": {
+                  "seconds": 29.663,
+                  "count": 3848,
+                  "pct": 27.9,
+                  "detail": {
+                    "attach_first": {
+                      "seconds": 25.1567,
+                      "count": 3,
+                      "pct": 23.7
+                    },
+                    "handoff_update": {
+                      "seconds": 1.6955,
+                      "count": 9,
+                      "pct": 1.6
+                    },
+                    "handoff_detach": {
+                      "seconds": 1.1129,
+                      "count": 2,
+                      "pct": 1.0
+                    }
+                  }
+                }
+              }
+            },
+            "workunit_dispatch": {
+              "seconds": 1.8453,
+              "count": 962,
+              "pct": 1.7
+            },
+            "pykokkos_execution": {
+              "seconds": 5.9168,
+              "count": 962,
+              "pct": 5.6
+            },
+            "kernel_exec": {
+              "seconds": 12.577,
+              "count": 974,
+              "pct": 11.8
+            },
+            "app_execution": {
+              "seconds": 52.8672,
+              "pct": 49.7
+            },
+            "total_wall_clock": {
+              "seconds": 106.2778
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
