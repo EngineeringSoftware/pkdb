@@ -32,26 +32,20 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pdb_avg": 99.1733,
-          "pdb_kernel_avg": 87.2501,
-          "pkdb_avg": 143.0815,
-          "pkdb_kernel_avg": 126.1755
+          "pkdb_avg": 152.9127,
+          "pkdb_kernel_avg": 134.8715
         },
         {
           "backend": "DebugCuda",
           "runs": 3,
-          "pdb_avg": 3.7694,
-          "pdb_kernel_avg": 2.2456,
-          "pkdb_avg": 21.9623,
-          "pkdb_kernel_avg": 7.3917
+          "pkdb_avg": 5.7515,
+          "pkdb_kernel_avg": 4.3059
         },
         {
           "backend": "DebugOpenMP",
           "runs": 3,
-          "pdb_avg": 4.0425,
-          "pdb_kernel_avg": 2.558,
-          "pkdb_avg": 16.0936,
-          "pkdb_kernel_avg": 9.1099
+          "pkdb_avg": 6.8117,
+          "pkdb_kernel_avg": 5.3989
         }
       ]
     },
@@ -61,26 +55,20 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pdb_avg": 205.6139,
-          "pdb_kernel_avg": 182.5061,
-          "pkdb_avg": 294.3107,
-          "pkdb_kernel_avg": 261.4402
+          "pkdb_avg": 316.7578,
+          "pkdb_kernel_avg": 280.6886
         },
         {
           "backend": "DebugCuda",
           "runs": 3,
-          "pdb_avg": 3.6338,
-          "pdb_kernel_avg": 2.1385,
-          "pkdb_avg": 22.2033,
-          "pkdb_kernel_avg": 7.6016
+          "pkdb_avg": 5.6232,
+          "pkdb_kernel_avg": 4.2578
         },
         {
           "backend": "DebugOpenMP",
           "runs": 3,
-          "pdb_avg": 3.7839,
-          "pdb_kernel_avg": 2.3906,
-          "pkdb_avg": 16.6503,
-          "pkdb_kernel_avg": 9.6058
+          "pkdb_avg": 7.0743,
+          "pkdb_kernel_avg": 5.7091
         }
       ]
     },
@@ -90,26 +78,20 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pdb_avg": 213.7456,
-          "pdb_kernel_avg": 190.0456,
-          "pkdb_avg": 312.1836,
-          "pkdb_kernel_avg": 276.3921
+          "pkdb_avg": 315.3221,
+          "pkdb_kernel_avg": 279.4659
         },
         {
           "backend": "DebugCuda",
           "runs": 3,
-          "pdb_avg": 3.6169,
-          "pdb_kernel_avg": 2.2503,
-          "pkdb_avg": 6.1999,
-          "pkdb_kernel_avg": 4.766
+          "pkdb_avg": 5.5253,
+          "pkdb_kernel_avg": 4.1319
         },
         {
           "backend": "DebugOpenMP",
           "runs": 3,
-          "pdb_avg": 8.7603,
-          "pdb_kernel_avg": 6.4958,
-          "pkdb_avg": 12.5256,
-          "pkdb_kernel_avg": 10.0183
+          "pkdb_avg": 7.2087,
+          "pkdb_kernel_avg": 5.8163
         }
       ]
     },
@@ -119,26 +101,20 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pdb_avg": 457.6184,
-          "pdb_kernel_avg": 395.608,
-          "pkdb_avg": 645.9689,
-          "pkdb_kernel_avg": 557.0448
+          "pkdb_avg": 685.8267,
+          "pkdb_kernel_avg": 595.1231
         },
         {
           "backend": "DebugCuda",
           "runs": 3,
-          "pdb_avg": 3.8421,
-          "pdb_kernel_avg": 2.2647,
-          "pkdb_avg": 6.267,
-          "pkdb_kernel_avg": 4.6305
+          "pkdb_avg": 5.7185,
+          "pkdb_kernel_avg": 4.2491
         },
         {
           "backend": "DebugOpenMP",
           "runs": 3,
-          "pdb_avg": 3.8697,
-          "pdb_kernel_avg": 2.4684,
-          "pkdb_avg": 9.7195,
-          "pkdb_kernel_avg": 7.8198
+          "pkdb_avg": 9.8863,
+          "pkdb_kernel_avg": 7.7291
         }
       ]
     },
@@ -148,26 +124,20 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pdb_avg": 447.8675,
-          "pdb_kernel_avg": 388.176,
-          "pkdb_avg": 664.2665,
-          "pkdb_kernel_avg": 575.0138
+          "pkdb_avg": 666.5894,
+          "pkdb_kernel_avg": 575.9102
         },
         {
           "backend": "DebugCuda",
           "runs": 3,
-          "pdb_avg": 86.9017,
-          "pdb_kernel_avg": 21.1062,
-          "pkdb_avg": 27.6616,
-          "pkdb_kernel_avg": 7.7539
+          "pkdb_avg": 5.9289,
+          "pkdb_kernel_avg": 4.3882
         },
         {
           "backend": "DebugOpenMP",
           "runs": 3,
-          "pdb_avg": 80.8335,
-          "pdb_kernel_avg": 22.6636,
-          "pkdb_avg": 23.5715,
-          "pkdb_kernel_avg": 12.7539
+          "pkdb_avg": 7.626,
+          "pkdb_kernel_avg": 5.8541
         }
       ]
     }
