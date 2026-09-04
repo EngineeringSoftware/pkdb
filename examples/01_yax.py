@@ -1,4 +1,4 @@
-import numpy as cp
+import cupy as cp
 import pykokkos as pk
 
 @pk.workunit
