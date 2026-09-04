@@ -32,8 +32,8 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pkdb_avg": 152.9127,
-          "pkdb_kernel_avg": 134.8715
+          "pdb_avg": 152.9127,
+          "pdb_kernel_avg":  134.8715
         },
         {
           "backend": "DebugCuda",
@@ -55,8 +55,8 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pkdb_avg": 316.7578,
-          "pkdb_kernel_avg": 280.6886
+          "pdb_avg": 316.7578,
+          "pdb_kernel_avg":  280.6886
         },
         {
           "backend": "DebugCuda",
@@ -78,8 +78,8 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pkdb_avg": 315.3221,
-          "pkdb_kernel_avg": 279.4659
+          "pdb_avg": 315.3221,
+          "pdb_kernel_avg":  279.4659
         },
         {
           "backend": "DebugCuda",
@@ -101,8 +101,8 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pkdb_avg": 685.8267,
-          "pkdb_kernel_avg": 595.1231
+          "pdb_avg": 685.8267,
+          "pdb_kernel_avg":  595.1231
         },
         {
           "backend": "DebugCuda",
@@ -124,8 +124,8 @@
         {
           "backend": "Debug",
           "runs": 3,
-          "pkdb_avg": 666.5894,
-          "pkdb_kernel_avg": 575.9102
+          "pdb_avg": 666.5894,
+          "pdb_kernel_avg":  575.9102
         },
         {
           "backend": "DebugCuda",
