@@ -24,5 +24,8 @@ kernel_profile.json
 
 examples/*.json
 
+# apptainer images built by sbatch-scripts/TACC/ensure_apptainer.sh
+*.sif
+
 # setup time generated data
 pkdb/core/debugger_paths.py
