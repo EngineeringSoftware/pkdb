@@ -1,3 +1,48 @@
 body.tex
 tables/*.tex
 figures/*.tex
+
+# temp file
+*~
+\#*\#
+*.DS_Store
+
+# eps to pdf
+*-eps-converted-to.pdf
+
+# pdflatex build
+
+*.aux
+*.log
+main.pdf
+*.aux
+*.log
+*.pyg
+sup.pdf
+
+# divps & ps2pdf build
+*.bbl
+*.blg
+*.dvi
+*.ps
+*.out
+*.xcp
+*.bbl
+*.blg
+*.dvi
+*.ps
+*.out
+*.xcp
+
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+comment.cut
+formatted.tex
+camera-ready/
+
+# latexindent temp files
+*.bak*
+
+# Other packages utils
+_minted-main/

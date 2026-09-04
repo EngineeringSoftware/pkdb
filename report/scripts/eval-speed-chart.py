@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """
-Execution-time (speed) chart + macros, derived entirely from input JSON paths.
+Debug wall-time (speed) chart + macros, derived entirely from input JSON paths.
+
+Reads the `*_debuggers_*.json` shape: one entry per backend per size, holding
+`pdb_avg` (plain pdb session) and `pkdb_avg` (pkdb session). The older
+`normal_avg`/`debug_avg` shape is still accepted.
 
 Usage:
   python3 eval-speed-chart.py path/to/a.json path/to/b.json
 
-  # Or scan a directory for every matching *.json (default: ../results,
-  # resolved relative to the current working directory):
+  # Or scan a directory for every matching *.json (default: the repo's
+  # benchmarks/results):
   python3 eval-speed-chart.py
   python3 eval-speed-chart.py --results-dir /path/to/results
 """
@@ -29,6 +33,11 @@ FNAME_RE = re.compile(
 
 CPU_ARCH_PREFIXES = ("x86_64_", "x86-64-", "arm64_", "aarch64_")
 VENDOR_TOKENS = {"nvidia", "amd", "intel"}
+# Result-kind marker sitting between the benchmark name and the platform.
+MARKER_PREFIXES = ("debuggers_", "old_vs_pkdb_", "debug_comparison_")
+# Files that parse like a sweep but are not a pdb-vs-pkdb one. `old_vs_pkdb`
+# carries a non-accelerated Debug baseline; eval-debug-chart.py owns it.
+SKIP_SUBSTRINGS = ("kernel_profile", "hotswap", "old_vs_pkdb", "steps_result")
 
 # Known paper macros for benchmark display names (paper/sc26/macros.tex);
 # anything else falls back to a plain capitalized string.
@@ -40,8 +49,8 @@ BENCH_DISPLAY = {
 }
 BENCH_ORDER = ("examinimd", "boltzmann", "ewald", "parki")
 
-BACKEND_ORDER = {"openmp_cuda": ("openmp", "cuda"), "hip_pair": ("hip",)}
-BACKEND_STYLE_NORM = {
+BACKEND_ORDER = ("openmp", "cuda", "hip")
+BACKEND_STYLE_PDB = {
     "openmp": "EvalPlotStyleOpenMP",
     "cuda": "EvalPlotStyleCuda",
     "hip": "EvalPlotStyleHIP",
@@ -51,12 +60,7 @@ BACKEND_STYLE_PKDB = {
     "cuda": "EvalPlotStylePkdbCuda",
     "hip": "EvalPlotStylePkdbHIP",
 }
-BACKEND_LEGEND_NORM = {"openmp": r"\Openmp", "cuda": r"\Cuda", "hip": r"\Hip"}
-BACKEND_LEGEND_PKDB = {
-    "openmp": r"\ourTool-\Openmp",
-    "cuda": r"\ourTool-\Cuda",
-    "hip": r"\ourTool-\Hip",
-}
+BACKEND_DISPLAY = {"openmp": r"\Openmp", "cuda": r"\Cuda", "hip": r"\Hip"}
 
 
 def _fmt_num(y: float) -> str:
@@ -83,9 +87,31 @@ def _prettify_token(tok: str) -> str:
     return tok.capitalize()
 
 
+def _strip_marker(stem: str) -> str:
+    low = stem.lower()
+    for m in MARKER_PREFIXES:
+        if low.startswith(m):
+            return stem[len(m) :]
+    return stem
+
+
+def backend_display(backend: str) -> str:
+    return BACKEND_DISPLAY.get(backend, backend.capitalize())
+
+
+def backend_style(backend: str, *, ours: bool) -> str:
+    styles = BACKEND_STYLE_PKDB if ours else BACKEND_STYLE_PDB
+    return styles.get(backend, styles["openmp"])
+
+
+def backend_legend(backend: str, *, ours: bool) -> str:
+    tool = r"\ourTool" if ours else r"\PDB"
+    return f"{tool}-{backend_display(backend)}"
+
+
 def platform_label(platform_stem: str) -> str:
     """Human-readable platform text: GPU name only, e.g. 'x86_64_amd_8x(mi300x)' -> '8XMI300X'."""
-    s = platform_stem
+    s = _strip_marker(platform_stem)
     low = s.lower()
     for pre in CPU_ARCH_PREFIXES:
         if low.startswith(pre):
@@ -101,7 +127,7 @@ def parse_filename(path: Path) -> Optional[Tuple[str, str]]:
     m = FNAME_RE.match(path.stem)
     if not m:
         return None
-    return m.group("bench").lower(), m.group("platform")
+    return m.group("bench").lower(), _strip_marker(m.group("platform"))
 
 
 @dataclass
@@ -111,17 +137,26 @@ class Platform:
     platform_stem: str
     platform_slug: str
     label: str
-    layout: str  # "openmp_cuda" or "hip_pair"
     x_key: str
     x_values: List[int]
-    series: Dict[str, Tuple[List[float], List[float]]]  # backend -> (normal, pkdb)
+    series: Dict[str, Tuple[List[float], List[float]]]  # backend -> (pdb, pkdb)
 
 
-def _debug_value(entry: dict) -> Optional[float]:
-    v = entry.get("debug_avg")
-    if v is None:
-        v = entry.get("pkdb_debug_avg")
-    return float(v) if v is not None else None
+def _pair(entry: dict) -> Tuple[Optional[float], Optional[float]]:
+    """(pdb, pkdb) times for one backend entry; older JSONs use normal_avg/debug_avg."""
+    if "pdb_avg" in entry:
+        return entry.get("pdb_avg"), entry.get("pkdb_avg")
+    debug = entry.get("debug_avg")
+    if debug is None:
+        debug = entry.get("pkdb_debug_avg")
+    return entry.get("normal_avg"), debug
+
+
+def _backend_key(name: str) -> str:
+    """DebugCuda -> cuda; a debug run always uses the Debug* space."""
+    if name.lower().startswith("debug") and len(name) > len("Debug"):
+        name = name[len("Debug") :]
+    return name.lower()
 
 
 def _x_key_of(sizes: List[dict]) -> Optional[str]:
@@ -132,87 +167,61 @@ def _x_key_of(sizes: List[dict]) -> Optional[str]:
     return None
 
 
-def _try_openmp_cuda(
+def _ordered_backends(series: Dict[str, object]) -> List[str]:
+    def key(b: str) -> Tuple[int, str]:
+        return (BACKEND_ORDER.index(b) if b in BACKEND_ORDER else len(BACKEND_ORDER), b)
+
+    return sorted(series, key=key)
+
+
+def _load_series(
     data: dict,
 ) -> Optional[Tuple[str, List[int], Dict[str, Tuple[List[float], List[float]]]]]:
+    """Read sizes[] into per-backend (pdb, pkdb) series, stopping at the first gap."""
     sizes = data.get("sizes") or []
     if not sizes:
         return None
     x_key = _x_key_of(sizes)
     if x_key is None:
         return None
+
     xs: List[int] = []
-    omp_n: List[float] = []
-    omp_p: List[float] = []
-    cu_n: List[float] = []
-    cu_p: List[float] = []
+    series: Dict[str, Tuple[List[float], List[float]]] = {}
     for entry in sizes:
         if x_key not in entry:
             break
-        by_backend = {
-            b.get("backend", "").lower(): b for b in entry.get("backends", [])
-        }
-        omp = by_backend.get("openmp")
-        cu = by_backend.get("cuda")
-        if omp is None or cu is None:
+        row: Dict[str, Tuple[float, float]] = {}
+        for backend_entry in entry.get("backends", []):
+            pdb_t, pkdb_t = _pair(backend_entry)
+            if pdb_t is None or pkdb_t is None:
+                row = {}
+                break
+            row[_backend_key(backend_entry.get("backend", ""))] = (
+                float(pdb_t),
+                float(pkdb_t),
+            )
+        if not row or (series and set(row) != set(series)):
             break
-        on, op = omp.get("normal_avg"), _debug_value(omp)
-        cn, cp = cu.get("normal_avg"), _debug_value(cu)
-        if on is None or op is None or cn is None or cp is None:
-            break
-        xs.append(int(entry[x_key]))
-        omp_n.append(float(on))
-        omp_p.append(float(op))
-        cu_n.append(float(cn))
-        cu_p.append(float(cp))
+        x_val = int(entry[x_key])
+        if x_val in xs:
+            # A re-run can leave the same size in the JSON twice.
+            continue
+        xs.append(x_val)
+        for backend, (pdb_t, pkdb_t) in row.items():
+            pdb_ys, pkdb_ys = series.setdefault(backend, ([], []))
+            pdb_ys.append(pdb_t)
+            pkdb_ys.append(pkdb_t)
+
     if not xs:
         return None
-    return x_key, xs, {"openmp": (omp_n, omp_p), "cuda": (cu_n, cu_p)}
-
-
-def _try_hip(
-    data: dict,
-) -> Optional[Tuple[str, List[int], Dict[str, Tuple[List[float], List[float]]]]]:
-    sizes = data.get("sizes") or []
-    if not sizes:
-        return None
-    x_key = _x_key_of(sizes)
-    if x_key is None:
-        return None
-    xs: List[int] = []
-    hn: List[float] = []
-    hp: List[float] = []
-    for entry in sizes:
-        if x_key not in entry:
-            break
-        by_backend = {
-            b.get("backend", "").lower(): b for b in entry.get("backends", [])
-        }
-        hip = by_backend.get("hip")
-        if hip is None:
-            break
-        na = hip.get("normal_avg")
-        if na is None:
-            break
-        pv = _debug_value(hip)
-        if pv is None:
-            dh = by_backend.get("debughip")
-            pv = dh.get("normal_avg") if dh else None
-        if pv is None:
-            break
-        xs.append(int(entry[x_key]))
-        hn.append(float(na))
-        hp.append(float(pv))
-    if not xs:
-        return None
-    return x_key, xs, {"hip": (hn, hp)}
+    return x_key, xs, series
 
 
 def load_platform(path: Path) -> Optional[Platform]:
     parsed = parse_filename(path)
     if parsed is None:
         print(
-            f"Skipping {path}: filename doesn't match <benchmark>[_results]_<platform>.json",
+            f"Skipping {path}: filename doesn't match <benchmark>[_kind]_<platform>.json",
             file=sys.stderr,
         )
         return None
@@ -225,16 +234,9 @@ def load_platform(path: Path) -> Optional[Platform]:
         print(f"Skipping {path}: {e}", file=sys.stderr)
         return None
 
-    layout = "openmp_cuda"
-    result = _try_openmp_cuda(data)
+    result = _load_series(data)
     if result is None:
-        layout = "hip_pair"
-        result = _try_hip(data)
-    if result is None:
-        print(
-            f"Skipping {path}: no paired OpenMP+Cuda or HIP(+DebugHIP) sweep found.",
-            file=sys.stderr,
-        )
+        print(f"Skipping {path}: no paired pdb/pkdb sweep found.", file=sys.stderr)
         return None
 
     x_key, xs, series = result
@@ -244,7 +246,6 @@ def load_platform(path: Path) -> Optional[Platform]:
         platform_stem=platform_stem,
         platform_slug=_slugify(platform_stem),
         label=platform_label(platform_stem),
-        layout=layout,
         x_key=x_key,
         x_values=xs,
         series=series,
@@ -257,7 +258,11 @@ def discover_paths(explicit: Sequence[Path], results_dir: Path) -> List[Path]:
     if not results_dir.is_dir():
         print(f"Warning: results dir not found: {results_dir}", file=sys.stderr)
         return []
-    return sorted(results_dir.glob("*.json"))
+    return [
+        p
+        for p in sorted(results_dir.glob("*.json"))
+        if not any(s in p.name for s in SKIP_SUBSTRINGS)
+    ]
 
 
 def bench_display(bench: str) -> str:
@@ -272,8 +277,9 @@ def _bench_sort_key(bench: str) -> Tuple[int, str]:
 
 def emit_macros(lines: List[str], prefix: str, plat: Platform) -> None:
     p = f"{prefix}-{plat.benchmark}-{plat.platform_slug}"
-    for backend, (norm, pkdb) in plat.series.items():
-        for tag, ys in (("norm", norm), ("pkdb", pkdb)):
+    for backend in _ordered_backends(plat.series):
+        pdb_ys, pkdb_ys = plat.series[backend]
+        for tag, ys in (("pdb", pdb_ys), ("pkdb", pkdb_ys)):
             bp = f"{p}-{backend}-{tag}"
             for i, y in enumerate(ys):
                 _def_macro(lines, f"{bp}-y-{i + 1}", _fmt_num(y))
@@ -289,8 +295,8 @@ def _coordinates(macro_prefix: str, n: int) -> str:
 def build_figure(prefix: str, plat: Platform) -> str:
     p = f"{prefix}-{plat.benchmark}-{plat.platform_slug}"
     n = len(plat.x_values)
-    backends = BACKEND_ORDER[plat.layout]
-    all_y = [y for b in backends for series in plat.series[b] for y in series]
+    backends = _ordered_backends(plat.series)
+    all_y = [y for b in backends for ys in plat.series[b] for y in ys]
     ymode = "log" if all_y and min(all_y) > 0 else "linear"
     xlabel = "Atoms" if plat.x_key == "atoms" else "Steps"
     xticklabels = ", ".join(str(x) for x in plat.x_values)
@@ -330,26 +336,25 @@ def build_figure(prefix: str, plat: Platform) -> str:
     lines.append(r"      ]")
 
     for backend in backends:
-        norm, pkdb = plat.series[backend]
-        lines.append(f"      % {backend} (norm)")
+        lines.append(f"      % {backend} (pdb)")
         lines.append(
-            f"      \\addplot[{BACKEND_STYLE_NORM[backend]}] "
-            + _coordinates(f"{p}-{backend}-norm", n)
+            f"      \\addplot[{backend_style(backend, ours=False)}] "
+            + _coordinates(f"{p}-{backend}-pdb", n)
             + ";"
         )
-        lines.append(f"      \\addlegendentry{{{BACKEND_LEGEND_NORM[backend]}}}")
-        lines.append(f"      % {backend} pkdb")
+        lines.append(f"      \\addlegendentry{{{backend_legend(backend, ours=False)}}}")
+        lines.append(f"      % {backend} (pkdb)")
         lines.append(
-            f"      \\addplot[{BACKEND_STYLE_PKDB[backend]}] "
+            f"      \\addplot[{backend_style(backend, ours=True)}] "
             + _coordinates(f"{p}-{backend}-pkdb", n)
             + ";"
         )
-        lines.append(f"      \\addlegendentry{{{BACKEND_LEGEND_PKDB[backend]}}}")
+        lines.append(f"      \\addlegendentry{{{backend_legend(backend, ours=True)}}}")
 
     lines.append(r"    \end{axis}")
     lines.append(r"  \end{tikzpicture}")
     cap = (
-        f"{bench_display(plat.benchmark)} execution time (Non-debug vs "
+        f"{bench_display(plat.benchmark)} debug wall time (\\PDB{{}} vs "
         f"\\ourTool{{}}) on {plat.label}."
     )
     lines.append(f"  \\caption{{{cap}}}")
@@ -361,7 +366,7 @@ def build_figure(prefix: str, plat: Platform) -> str:
 def build_chart_tex(prefix: str, platforms: List[Platform]) -> str:
     if not platforms:
         return (
-            "% Auto-generated by paper/test/scripts/eval-speed-chart.py\n"
+            "% Auto-generated by report/scripts/eval-speed-chart.py\n"
             "% No platforms loaded; chart omitted.\n"
         )
     ordered = sorted(
@@ -369,7 +374,7 @@ def build_chart_tex(prefix: str, platforms: List[Platform]) -> str:
     )
     sources = ", ".join(p.path.name for p in platforms)
     parts = [
-        "% Auto-generated by paper/test/scripts/eval-speed-chart.py",
+        "% Auto-generated by report/scripts/eval-speed-chart.py",
         f"% Source JSONs: {sources}",
         "% Requires: \\usepackage{tikz}, \\usepackage{pgfplots}",
         "",
@@ -384,9 +389,10 @@ def main() -> None:
     script_dir = Path(__file__).resolve().parent
     default_tables_dir = script_dir.parent / "tables"
     default_figures_dir = script_dir.parent / "figures"
+    default_results_dir = script_dir.parent.parent / "benchmarks" / "results"
 
     parser = argparse.ArgumentParser(
-        description="Generate an execution-time chart + macros from benchmark JSON, no config file needed.",
+        description="Generate a debug wall-time chart + macros from benchmark JSON, no config file needed.",
     )
     parser.add_argument(
         "json_paths",
@@ -397,8 +403,8 @@ def main() -> None:
     parser.add_argument(
         "--results-dir",
         type=Path,
-        default=Path("../results"),
-        help="Directory to scan for *.json when no paths are given (default: ../results, relative to cwd).",
+        default=default_results_dir,
+        help=f"Directory to scan for *.json when no paths are given (default: {default_results_dir}).",
     )
     parser.add_argument(
         "--macros-out-dir",
@@ -435,7 +441,7 @@ def main() -> None:
     figures_out_dir.mkdir(parents=True, exist_ok=True)
 
     macro_lines: List[str] = [
-        "%% Auto-generated by paper/test/scripts/eval-speed-chart.py",
+        "%% Auto-generated by report/scripts/eval-speed-chart.py",
         "%% \\UseMacro{eval-test-speed-...} in the pgfplots coordinates",
         "",
     ]
